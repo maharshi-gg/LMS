@@ -1,4 +1,4 @@
-class AddFieldsToBooks < ActiveRecord::Migration[5.2]
+class AddFieldsToBooks < ActiveRecord::Migration[5.0]
   def change
     # creating table BookRequest.
     create_table :book_request do |t|
@@ -7,17 +7,15 @@ class AddFieldsToBooks < ActiveRecord::Migration[5.2]
       t.boolean :is_approved
     end
 
-    add_reference :librarians, foreign_key: {to_table: :book_request}
-    add_reference :students, foreign_key: {to_table: :book_request}
-    add_reference :books, foreign_key: {to_table: :book_request}
-
     # adding fields to Books table.
     add_column :books, :book_count, :integer
     add_column :books, :is_issued, :boolean
     add_column :books, :number_hold_req, :integer
 
-
-
+    # add_reference :libraries, :books, foreign_key: true
+    add_reference :book_request, :books, foreign_key: true
+    add_reference :book_request, :librarians, foreign_key: true
+    add_reference :book_request, :students, foreign_key: true
 
     # add_foreign_key :books, :book_request
     # add_foreign_key :students, :book_request

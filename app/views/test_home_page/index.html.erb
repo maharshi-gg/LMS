@@ -1,4 +1,11 @@
 <h1>TEST</h1>
-<%= @resquery %>
+<div>
+  <p>Welcome to the Homepage.</p>
+  Find the links to the various pages here.
+</div>
 <br><br>
-<%= link_to "Sign out", destroy_user_session_path, :method => :delete %> 
+<%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
+<%= link_to 'Librarians', librarians_path %>
+<%= link_to 'Students', students_path %>
+<%= link_to 'Books',books_path %>
+<%#= link_to '' %>
