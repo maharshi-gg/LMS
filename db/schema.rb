@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_27_233440) do
+ActiveRecord::Schema.define(version: 2019_09_27_232653) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,10 +28,6 @@ ActiveRecord::Schema.define(version: 2019_09_27_233440) do
     t.boolean "is_special"
     t.boolean "is_approved"
     t.bigint "students_id"
-    t.bigint "books_id"
-    t.bigint "librarians_id"
-    t.index ["books_id"], name: "index_book_request_on_books_id"
-    t.index ["librarians_id"], name: "index_book_request_on_librarians_id"
     t.index ["students_id"], name: "index_book_request_on_students_id"
   end
 
@@ -51,8 +47,6 @@ ActiveRecord::Schema.define(version: 2019_09_27_233440) do
     t.integer "book_count"
     t.boolean "is_issued"
     t.integer "number_hold_req"
-    t.bigint "students_id"
-    t.index ["students_id"], name: "index_books_on_students_id"
   end
 
   create_table "librarians", force: :cascade do |t|
@@ -98,9 +92,6 @@ ActiveRecord::Schema.define(version: 2019_09_27_233440) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "book_request", "books", column: "books_id"
-  add_foreign_key "book_request", "librarians", column: "librarians_id"
   add_foreign_key "book_request", "students", column: "students_id"
   add_foreign_key "books", "libraries", column: "id"
-  add_foreign_key "books", "students", column: "students_id"
 end
