@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  # so that only authenticated user can access these pages. 
+  # so that only authenticated user can access these pages.
   # Refer: https://github.com/plataformatec/devise/wiki/How-To:-Require-authentication-for-all-pages
   # and https://github.com/plataformatec/devise/wiki/How-To:-Define-resource-actions-that-require-authentication-using-routes.rb
   authenticate :user do
@@ -18,10 +18,10 @@ Rails.application.routes.draw do
     get 'book/new'
     get 'urls/new'
   end
-  
+
   root 'home#index'
   get 'page2', to: 'page2#index', as: 'page2'
-  
+
   devise_for :users, :controllers => { registrations: 'registrations'}
 
 
@@ -33,6 +33,6 @@ Rails.application.routes.draw do
   # end
 
 
-
+  root 'students#index'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
