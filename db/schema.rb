@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_27_233440) do
+ActiveRecord::Schema.define(version: 2019_09_28_220518) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,7 +51,7 @@ ActiveRecord::Schema.define(version: 2019_09_27_233440) do
     t.integer "book_count"
     t.boolean "is_issued"
     t.integer "number_hold_req"
-    t.integer "libraries_id"
+    t.bigint "libraries_id"
     t.index ["libraries_id"], name: "index_books_on_libraries_id"
   end
 
@@ -104,6 +104,5 @@ ActiveRecord::Schema.define(version: 2019_09_27_233440) do
   add_foreign_key "book_request", "books", column: "books_id"
   add_foreign_key "book_request", "librarians", column: "librarians_id"
   add_foreign_key "book_request", "students", column: "students_id"
-  add_foreign_key "books", "libraries", column: "id"
-  add_foreign_key "books", "students", column: "students_id"
+  add_foreign_key "books", "libraries", column: "libraries_id"
 end
