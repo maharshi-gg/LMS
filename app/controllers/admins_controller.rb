@@ -49,6 +49,7 @@ class AdminsController < ApplicationController
         format.json { render json: @admin.errors, status: :unprocessable_entity }
       end
     end
+
   end
 
   # DELETE /admins/1

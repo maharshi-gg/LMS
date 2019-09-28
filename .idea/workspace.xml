@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
+<<<<<<< Updated upstream
     <list default="true" id="c5c94d83-7723-4f44-bdae-b52409fbc7d7" name="Default Changelist" comment="">
       <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/.idea/.rakeTasks" afterDir="false" />
@@ -101,6 +102,12 @@
       <change beforePath="$PROJECT_DIR$/tmp/cache/assets/sprockets/v3.0/vc/vcgiILg1wO98x-a4kX678ASAFWA1cL0iVx07VkHLPqA.cache" beforeDir="false" afterPath="$PROJECT_DIR$/tmp/cache/assets/sprockets/v3.0/vc/vcgiILg1wO98x-a4kX678ASAFWA1cL0iVx07VkHLPqA.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tmp/cache/bootsnap-load-path-cache" beforeDir="false" afterPath="$PROJECT_DIR$/tmp/cache/bootsnap-load-path-cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tmp/development_secret.txt" beforeDir="false" afterPath="$PROJECT_DIR$/tmp/development_secret.txt" afterDir="false" />
+=======
+    <list default="true" id="1a56bc6e-242c-47c9-89e6-ac8fbcbd66af" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.generators" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.generators" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/LMS.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/LMS.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gemfile" beforeDir="false" afterPath="$PROJECT_DIR$/Gemfile" afterDir="false" />
+>>>>>>> Stashed changes
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -108,9 +115,12 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+<<<<<<< Updated upstream
   <component name="FavoritesManager">
     <favorites_list name="LMS" />
   </component>
+=======
+>>>>>>> Stashed changes
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
@@ -124,7 +134,11 @@
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+<<<<<<< Updated upstream
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+=======
+    <property name="nodejs_package_manager_path" value="npm" />
+>>>>>>> Stashed changes
     <property name="settings.editor.selected.configurable" value="org.jetbrains.plugins.ruby.settings.RubyActiveModuleSdkConfigurable" />
   </component>
   <component name="RunDashboard">
@@ -238,12 +252,17 @@
       <method v="2" />
     </configuration>
   </component>
+<<<<<<< Updated upstream
   <component name="SpringUtil" SPRING_PRE_LOADER_OPTION="false" RAKE_SPRING_PRE_LOADER_OPTION="false" RAILS_SPRING_PRE_LOADER_OPTION="false" />
+=======
+  <component name="SpringUtil" SPRING_PRE_LOADER_OPTION="true" RAKE_SPRING_PRE_LOADER_OPTION="true" RAILS_SPRING_PRE_LOADER_OPTION="true" />
+>>>>>>> Stashed changes
   <component name="SvnConfiguration">
     <configuration />
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
+<<<<<<< Updated upstream
       <changelist id="c5c94d83-7723-4f44-bdae-b52409fbc7d7" name="Default Changelist" comment="" />
       <created>1569100125347</created>
       <option name="number" value="Default" />
@@ -252,6 +271,14 @@
       <workItem from="1569100126712" duration="655000" />
       <workItem from="1569597394147" duration="15000" />
       <workItem from="1569619851181" duration="2421000" />
+=======
+      <changelist id="1a56bc6e-242c-47c9-89e6-ac8fbcbd66af" name="Default Changelist" comment="" />
+      <created>1569625698597</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1569625698597</updated>
+      <workItem from="1569625701862" duration="65000" />
+>>>>>>> Stashed changes
     </task>
     <servers />
   </component>
@@ -263,9 +290,13 @@
       <map>
         <entry key="MAIN">
           <value>
+<<<<<<< Updated upstream
             <State>
               <option name="COLUMN_ORDER" />
             </State>
+=======
+            <State />
+>>>>>>> Stashed changes
           </value>
         </entry>
       </map>
