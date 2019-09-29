@@ -1,5 +1,4 @@
 class TestHomePageController < ApplicationController
-  #before_action :user_only
   def index
     # execute SQL query just for testing
     query = "update users set university='NCSU' where email='a@g'"

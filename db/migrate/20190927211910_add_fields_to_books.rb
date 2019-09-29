@@ -1,4 +1,4 @@
-class AddFieldsToBooks < ActiveRecord::Migration[5.0]
+class AddFieldsToBooks < ActiveRecord::Migration[5.2]
   def change
     # creating table BookRequest.
     create_table :book_request do |t|
