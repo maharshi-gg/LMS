@@ -73,7 +73,9 @@ ActiveRecord::Schema.define(version: 2019_09_28_220518) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "books_id"
+    t.bigint "{:foreign_key=>{:to_table=>:books}}_id"
     t.index ["books_id"], name: "index_libraries_on_books_id"
+    t.index ["{:foreign_key=>{:to_table=>:books}}_id"], name: "index_libraries_on_{:foreign_key=>{:to_table=>:books}}_id"
   end
 
   create_table "students", force: :cascade do |t|
@@ -102,7 +104,9 @@ ActiveRecord::Schema.define(version: 2019_09_28_220518) do
   end
 
   add_foreign_key "book_request", "books", column: "books_id"
+  add_foreign_key "book_request", "books", column: "id"
   add_foreign_key "book_request", "librarians", column: "librarians_id"
   add_foreign_key "book_request", "students", column: "students_id"
+  add_foreign_key "books", "libraries", column: "id"
   add_foreign_key "books", "libraries", column: "libraries_id"
 end
