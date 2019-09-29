@@ -6,4 +6,10 @@ class TestHomePageController < ApplicationController
     query = 'select * from users'
     @resquery = ActiveRecord::Base.connection.execute(query)
   end
+
+  def admin_only
+    unless current_user.admin?
+      redirect_to home_index_path , :alert => "Access denied."
+    end
+  end
 end

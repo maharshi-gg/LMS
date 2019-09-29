@@ -4,14 +4,23 @@
 
 <table>
   <thead>
-    <tr>
-      <th colspan="3"></th>
-    </tr>
+  <tr>
+    <th>Name</th>
+    <th>University</th>
+    <th>Location</th>
+    <th>Borrowing Days Limit</th>
+    <th colspan="6"></th>
+  </tr>
   </thead>
 
   <tbody>
     <% @libraries.each do |library| %>
       <tr>
+        <td><%= library.name %></td>
+        <td><%= library.university %></td>
+        <td><%= library.location %></td>
+        <td><%= library.max_days %></td>
+        <td><%= library.fines %></td>
         <td><%= link_to 'Show', library %></td>
         <td><%= link_to 'Edit', edit_library_path(library) %></td>
         <td><%= link_to 'Destroy', library, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -23,3 +32,4 @@
 <br>
 
 <%= link_to 'New Library', new_library_path %>
+<%= link_to 'Back', librarians_path %>>
