@@ -13,22 +13,22 @@
 
   <div class="field">
     <%= form.label :name %>
-    <%= form.text_field :name %>
+    <%= form.text_field :name, :required => true%>
   </div>
 
   <div class="field">
     <%= form.label :university %>
-    <%= form.text_field :university %>
+    <%= form.text_field :university , :required => true%>
   </div>
 
   <div class="field">
     <%= form.label :location %>
-    <%= form.text_field :location %>
+    <%= form.text_field :location , :required => true%>
   </div>
 
   <div>
     <%= form.label :max_days %>
-    <%= form.number_field :max_days %>
+    <%= form.number_field :max_days , :required => true%>
   </div>
 
   <div class="actions">

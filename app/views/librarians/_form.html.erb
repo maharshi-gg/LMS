@@ -13,22 +13,27 @@
 
   <div class="field">
     <%= form.label :email %>
-    <%= form.text_field :email %>
+    <%= form.text_field :email , :required => true%>
   </div>
 
   <div class="field">
     <%= form.label :name %>
-    <%= form.text_field :name %>
+    <%= form.text_field :name , :required => true%>
   </div>
 
-  <div class="field">
-    <%= form.label :password %>
-    <%= form.text_field :password %>
-  </div>
+<!--  <div class="field">-->
+    <%#= form.label :password %>
+    <%#= form.password_field :password, :required => true%>
+<!--  </div>-->
+
+<!--  <div class="field">-->
+<!--    <%#= form.label :library %><br>-->
+    <%#= form.text_field :library%>
+<!--  </div>-->
 
   <div class="field">
-    <%= form.label :library %>
-    <%= form.text_field :library %>
+    <%= form.label :library_name %><br>
+    <%= form.select :libraries_id, options_for_select(Library.all.map{ |l| [l.name, l.id] })%>
   </div>
 
   <div class="actions">

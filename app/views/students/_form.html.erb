@@ -13,33 +13,35 @@
 
   <div class="field">
     <%= form.label :email %>
-    <%= form.text_field :email %>
+    <%= form.text_field :email, :required => true %>
   </div>
 
   <div class="field">
     <%= form.label :name %>
-    <%= form.text_field :name %>
+    <%= form.text_field :name, :required => true %>
   </div>
 
   <div class="field">
     <%= form.label :password %>
-    <%= form.text_field :password %>
+    <%= form.password_field :password, :required => true %>
   </div>
 
   <div class="field">
     <%= form.label :education %>
-    <%= form.text_field :education %>
+    <%= form.select :education, options_for_select([ ["Undergraduate","Undergradudate"], ["Masters","Masters"], ["PhD", "PhD"] ]), :required => true %>
   </div>
 
   <div class="field">
     <%= form.label :university %>
-    <%= form.text_field :university %>
+    <%= form.text_field :university,  :required => true %>
   </div>
 
-  <div class="field">
-    <%= form.label :max_books %>
-    <%= form.number_field :max_books %>
-  </div>
+<!--  <div class="field">-->
+    <%#= form.label :max_books %>
+    <%#= form.number_field :max_books %>
+<!--  </div>-->
+
+  <%  %>
 
   <div class="actions">
     <%= form.submit %>
