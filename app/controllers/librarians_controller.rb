@@ -17,6 +17,25 @@ class LibrariansController < ApplicationController
     # @my_models = policy_Scope(MyModel)
     @librarians = policy_scope(Librarian)
     @librarians = Librarian.all
+
+    @libnamelist = []
+    @librarians.each do |lib|
+      arr=[]
+      arr.push(lib.email)
+      arr.push(lib.name)
+      arr.push(lib.password)
+
+      libno = lib.libraries_id
+      libname = Library.find(libno).name
+      puts(libname)
+      arr.push(libname)
+
+      @libnamelist.push(arr)
+
+      # push complete librarian object so show/edit/destroy methods can be shown.
+      @libnamelist.push(lib)
+    end
+
     authorize Librarian
   end
 
@@ -56,6 +75,9 @@ class LibrariansController < ApplicationController
     authorize Librarian
     @librarian = Librarian.new(librarian_params)
 
+    # create user entry here
+    puts librarian_params
+
     respond_to do |format|
       if @librarian.save
         format.html { redirect_to @librarian, notice: 'Librarian was successfully created.' }
@@ -90,6 +112,45 @@ class LibrariansController < ApplicationController
     respond_to do |format|
       format.html { redirect_to librarians_url, notice: 'Librarian was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+
+  def copy_data
+    if self.librarian?
+
+
+      @user = User.find(self.id)
+      if Librarian.find_by_email(self.email).nil?
+        @lib = Librarian.new(email: self.email, password: self.encrypted_password, libraries_id: 1)
+        @lib.save
+        #   flash[:success] = "Successfully saved data to Librarian model"
+        # redirect_to librarians_path
+
+        # else
+        #   flash[:error] = "Could not create record"
+        # end
+      end
+
+      # @user = Librarian.find(self.id)
+      # if (nil == @user)
+      #   @lib = Librarian.create(email: self.email, name:self.email, password: self.encrypted_password, users_id: self.id)
+      #   @lib.save
+      # else
+      #   @lib = Librarian.create(email: self.email, name:self.email, password: self.encrypted_password, users_id: self.id)
+      #   @lib.save
+      # end
+      #
+    elsif self.user?
+      # @user = User.find(self.id)
+      if Student.find_by_email(self.email).nil?
+        @stud = Student.new(email: self.email, password: self.encrypted_password)
+        @stud.save
+        #   flash[:success] = "Successfully saved data to Student model"
+        # redirect_to students_path
+        # else
+        #   flash[:error] = "Could not create record"
+        # end
+      end
     end
   end
 

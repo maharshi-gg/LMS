@@ -23,7 +23,7 @@ class LibrarianPolicy < ApplicationPolicy
   def index?
     # @user = Librarians.find(params[:id])
     # redirect_to librarians unless current_user == @user
-    current_user.librarian?
+    current_user.librarian? or current_user.admin?
     # logger.info "here here ",current_user.kind_of?
     # or @current_user.admin? or @current_user.user?
   end

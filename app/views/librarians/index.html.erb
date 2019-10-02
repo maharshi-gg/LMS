@@ -7,29 +7,48 @@
     <tr>
       <th>Email</th>
       <th>Name</th>
-      <th>Password</th>
+<!--      <th>Password</th>-->
       <th>Library</th>
-      <th colspan="3"></th>
+      <th colspan="10"></th>
     </tr>
   </thead>
 
   <tbody>
-    <% @librarians.each do |librarian| %>
-      <tr>
-        <td><%= librarian.email %></td>
-        <td><%= librarian.name %></td>
-        <td><%= librarian.password %></td>
-        <td><%= librarian.libraries_id %></td>
-        <td><%= link_to 'Show', librarian %></td>
-        <td><%= link_to 'Edit', edit_librarian_path(librarian) %></td>
-        <td><%= link_to 'Destroy', librarian, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+    <%# @librarians.each do |librarian| %>
+<!--      <tr>-->
+<!--        <td><%#= librarian.email %></td>-->
+<!--        <td><%#= librarian.name %></td>-->
+<!--        <td><%#= librarian.password %></td>-->
+<!--        <td><%#= librarian.libraries_id %></td>-->
+<!--        <td><%#= link_to 'Show', librarian %></td>-->
+<!--        <td><%#= link_to 'Edit', edit_librarian_path(librarian) %></td>-->
+<!--        <td><%#= link_to 'Destroy', librarian, method: :delete, data: { confirm: 'Are you sure?' } %></td>-->
+<!--      </tr>-->
+    <%# end %>
+
+<!--    libnamelist contains email, name, password, library, complete librarian object -->
+    <% @libnamelist.each_with_index do |libr, i| %>
+    <tr>
+      <td><%= libr[0] %></td>
+      <td><%= libr[1] %></td>
+      <td><%= libr[3] %></td>
+      <td><%= "woah" %></td>
+      <% @librarians.each_with_index do |librarian, index| %>
+        <% if index == i then %>
+<!--          <td><%#= link_to 'Show', librarian %></td>-->
+          <td><%= link_to 'Edit', edit_librarian_path(librarian) %></td>
+          <td><%= link_to 'Destroy', librarian, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <% break %>
+        <% end %>
+      <% end %>
+
+    </tr>
     <% end %>
   </tbody>
 </table>
 
 <br>
 
-<%= link_to 'New Librarian', new_librarian_path %>
-<%= link_to 'Library Details', libraries_path %>
+<%= link_to 'New Librarian', new_librarian_path %><br>
+<%= link_to 'Library Details', libraries_path %><br><br>
 
