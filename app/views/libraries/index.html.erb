@@ -30,6 +30,7 @@
 </table>
 
 <br>
-
+<% if current_user.librarian? || current_user.admin? %>
 <%= link_to 'New Library', new_library_path %>
-<%= link_to 'Back', librarians_path %>>
+<% end %>
+<%= link_to 'Back', root_path %>

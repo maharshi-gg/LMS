@@ -26,14 +26,16 @@
     <%= form.password_field :password, :required => true %>
   </div>
 
+  <% if student.education == "" || student.education.nil? %>
   <div class="field">
     <%= form.label :education %>
-    <%= form.select :education, options_for_select([ ["Undergraduate","Undergradudate"], ["Masters","Masters"], ["PhD", "PhD"] ]), :required => true %>
+    <%= form.select :education, options_for_select([ ["Undergraduate","Undergradudate"], ["Masters","Masters"], ["PhD", "PhD"] ]), :required => true  %>
   </div>
+  <% end %>
 
   <div class="field">
     <%= form.label :university %>
-    <%= form.text_field :university,  :required => true %>
+    <%= form.text_field :university, :required => true, :disabled => !(student.university == "" || student.university.nil?) %>
   </div>
 
 <!--  <div class="field">-->

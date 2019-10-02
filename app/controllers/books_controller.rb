@@ -4,7 +4,11 @@ class BooksController < ApplicationController
   # GET /books
   # GET /books.json
   def index
-    @books = Book.all
+    @books = if params[:search]
+               Book.where('title LIKE ? or author LIKE ?', "%#{params[:search]}%","%#{params[:search]}%")
+             else
+                Book.all
+               end
   end
 
   # GET /books/1
@@ -39,6 +43,16 @@ class BooksController < ApplicationController
     end
   end
 
+
+  def search
+    if params[:search].blank?
+      redirect_to(root_path, alert: "Empty field!") and return
+    else
+      @parameter = params[:search].downcase
+      @results = Book.all.where("lower(title) LIKE :search", search: @parameter)
+      end
+
+    end
   # PATCH/PUT /books/1
   # PATCH/PUT /books/1.json
   def update
@@ -75,7 +89,7 @@ class BooksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def book_params
-      params.require(:book).permit(:title, :isbn, :author, :language, :published, :edition, :subject, :summary, :special_collection, :book_count, :libraries_id)
+      params.require(:book).permit(:title, :isbn, :author, :language, :published, :edition, :subject, :summary, :special_collection, :book_count, :libraries_id, :search)
       # params.fetch(:book, {})
     end
 end

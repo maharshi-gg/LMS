@@ -2,6 +2,11 @@
 
 <h1>Books</h1>
 
+<%= form_tag(books_path, method: :get) do %>
+  <%= text_field_tag :search %>
+  <%= submit_tag 'Search' %>
+<% end %>
+
 <table>
   <thead>
     <tr>
@@ -35,4 +40,4 @@
 <br>
 
 <%= link_to 'New Book', new_book_path %>
-<%= link_to 'Back', books_path %>
+<%= link_to 'Back', root_path %>
