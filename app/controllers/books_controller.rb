@@ -4,11 +4,19 @@ class BooksController < ApplicationController
   # GET /books
   # GET /books.json
   def index
-    @books = if params[:search]
-               Book.where('title LIKE ? or author LIKE ?', "%#{params[:search]}%","%#{params[:search]}%")
-             else
-                Book.all
+    @books = if (params[:search_by_title] || params[:search_by_author] || params[:search_by_subject] || params[:search_by_published_before] || params[:search_by_published_after])
+               if (params[:search_by_published_before]!="" && params[:search_by_published_after]!="")
+                 Book.where('lower(title) LIKE ? and lower(author) LIKE ? and lower(subject) LIKE ? and published > ? and published < ?', "%#{params[:search_by_title]}%","%#{params[:search_by_author]}%","%#{params[:search_by_subject]}%","#{params[:search_by_published_before]}","#{params[:search_by_published_after]}")
+               elsif (params[:search_by_published_before]!="")
+                 Book.where('lower(title) LIKE ? and lower(author) LIKE ? and lower(subject) LIKE ? and published < ?', "%#{params[:search_by_title]}%","%#{params[:search_by_author]}%","%#{params[:search_by_subject]}%","#{params[:search_by_published_before]}")
+               elsif (params[:search_by_published_after]!="")
+                 Book.where('lower(title) LIKE ? and lower(author) LIKE ? and lower(subject) LIKE ? and published > ?', "%#{params[:search_by_title]}%","%#{params[:search_by_author]}%","%#{params[:search_by_subject]}%" ,"#{params[:search_by_published_after]}")
+               else
+                 Book.where('lower(title) LIKE ? and lower(author) LIKE ? and lower(subject) LIKE ?', "%#{params[:search_by_title]}%","%#{params[:search_by_author]}%","%#{params[:search_by_subject]}%")
                end
+             else
+               Book.all
+             end
   end
 
   # GET /books/1

@@ -4,72 +4,72 @@
       <h2><%= pluralize(book.errors.count, "error") %> prohibited this book from being saved:</h2>
 
       <ul>
-      <% book.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
+        <% book.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
       </ul>
     </div>
   <% end %>
 
   <%#= form_for :book, url: books_path do |f| %>
-    <p>
-      <%= f.label :title %><br>
-      <%= f.text_field :title %><br>
-    </p>
+  <p>
+    <%= f.label :title %><br>
+    <%= f.text_field :title %><br>
+  </p>
 
-    <p>
-      <%= f.label :isbn %><br>
-      <%= f.text_field :isbn %><br>
-    </p>
+  <p>
+    <%= f.label :isbn %><br>
+    <%= f.text_field :isbn %><br>
+  </p>
 
-    <p>
-      <%= f.label :author %><br>
-      <%= f.text_field :author %><br>
-    </p>
+  <p>
+    <%= f.label :author %><br>
+    <%= f.text_field :author %><br>
+  </p>
 
-    <p>
-      <%= f.label :language %><br>
-      <%= f.select(:language, options_for_select([['English', 'English']])) %>
-    </p>
+  <p>
+    <%= f.label :language %><br>
+    <%= f.select(:language, options_for_select([['English', 'English']])) %>
+  </p>
 
-    <p>
-      <%= f.label :published %><br>
-      <%= f.text_field :published, data:{ provide: 'datepicker' } %>
-    </p>
+  <p>
+    <%= f.label :published %><br>
+    <%= f.date_field :published %>
+  </p>
 
-    <p>
-      <%= f.label :edition %><br>
-      <%= f.number_field :edition, :class => 'text_field' %>
-    </p>
+  <p>
+    <%= f.label :edition %><br>
+    <%= f.number_field :edition, :class => 'text_field' %>
+  </p>
 
-    <p>
-      <%= f.label :subject %><br>
-      <%= f.text_field :subject %>
-    </p>
+  <p>
+    <%= f.label :subject %><br>
+    <%= f.text_field :subject %>
+  </p>
 
-    <p>
-      <%= f.label :summary %><br>
-      <%= f.text_field :summary %>
-    </p>
+  <p>
+    <%= f.label :summary %><br>
+    <%= f.text_field :summary %>
+  </p>
 
-    <p>
-      <%= f.label :is_special_collection %><br>
-      <%= f.select(:special_collection, options_for_select([['Yes', 'Yes'], ['No', 'No']])) %>
-    </p>
+  <p>
+    <%= f.label :is_special_collection %><br>
+    <%= f.select(:special_collection, options_for_select([['Yes', 'Yes'], ['No', 'No']])) %>
+  </p>
 
-    <p>
-      <%= f.label :count_book %><br>
-      <%= f.number_field :book_count, :class => 'text_field' %>
-    </p>
+  <p>
+    <%= f.label :count_book %><br>
+    <%= f.number_field :book_count, :class => 'text_field' %>
+  </p>
 
-    <p>
-      <%= f.label :library_name %><br>
-      <%= f.select :libraries_id, options_for_select(Library.all.map{ |l| [l.name, l.id] }) %>
-    </p>
+  <p>
+    <%= f.label :library_name %><br>
+    <%= f.select :libraries_id, options_for_select(Library.all.map{ |l| [l.name, l.id] }) %>
+  </p>
 
-<!--    <p>-->
-      <%#= f.submit %>
-<!--    </p>-->
+  <!--    <p>-->
+  <%#= f.submit %>
+  <!--    </p>-->
 
   <%# end %>
 
