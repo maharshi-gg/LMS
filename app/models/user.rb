@@ -1,10 +1,13 @@
 class User < ApplicationRecord
   enum role: {user: 0, librarian: 1, admin: 2}
   after_initialize :set_default_role,:if => :new_record?
-  #before_save :copy_data
-  after_save :copy_data
+  # before_save :copy_data
+  # after_save :copy_data
 
-  # has_many :librarians
+  has_many :students
+  has_many :librarians
+  accepts_nested_attributes_for :students
+  accepts_nested_attributes_for :librarians
 
   def set_default_role
     self.role ||= :user

@@ -38,12 +38,10 @@
     <%= form.text_field :university, :required => true, :disabled => !(student.university == "" || student.university.nil?) %>
   </div>
 
-<!--  <div class="field">-->
-    <%#= form.label :max_books %>
-    <%#= form.number_field :max_books %>
-<!--  </div>-->
-
-  <%  %>
+  <div class="field" id="mb_field">
+    <%= form.label :max_books %>
+    <%= form.number_field :max_books %>
+  </div>
 
   <div class="actions">
     <%= form.submit %>

@@ -17,7 +17,7 @@
 
   <tbody>
     <% @students.each do |student| %>
-      <% if ((current_user.email == student.email) || current_user.librarian? || current_user.admin? )%>
+      <% if current_user.admin? %>
       <tr>
         <td><%= student.email %></td>
         <td><%= student.name %></td>
@@ -27,7 +27,20 @@
         <td><%= student.max_books %></td>
         <td><%= link_to 'Show', student %></td>
         <td><%= link_to 'Edit', edit_student_path(student) %></td>
-        <td><%= link_to 'Destroy', student, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% if current_user.admin? %>
+          <td><%= link_to 'Destroy', student, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
+      </tr>
+      <% elsif current_user.user? && ((current_user.email == student.email) )%>
+      <tr>
+        <td><%= student.email %></td>
+        <td><%= student.name %></td>
+        <td><%= student.password %></td>
+        <td><%= student.education %></td>
+        <td><%= student.university %></td>
+        <td><%= student.max_books %></td>
+        <td><%= link_to 'Show', student %></td>
+        <td><%= link_to 'Edit', edit_student_path(student) %></td>
       </tr>
       <%end %>
     <% end %>
@@ -35,7 +48,8 @@
 </table>
 
 <br>
-
-<%= link_to 'New Student', new_student_path %>
+<% if current_user.admin? %>
+  <%= link_to 'New Student', new_student_path %>
+<% end %>
 <%= link_to 'Show All Libraries',  libraries_path %>
 <%= link_to 'View All Books', books_path %>

@@ -13,4 +13,52 @@
 //= require rails-ujs
 //= require activestorage
 //= require turbolinks
+//= require jquery3
+//= require jquery_ujs
 //= require_tree .
+//= require_self
+
+var ready = function () {
+    $('#more2come').hide();
+    //$('#lib2come').hide();
+    $('#user_role').change(function(){
+        if($('#user_role').val()=='user'){
+            $('#more2come').show();
+            $('#student_sub_form').show();
+            $('#librarian_sub_form').hide();
+            $('#student_name').required(true);
+            $('#student_edcation').required(true);
+            $('#student_university').required(true);
+        }
+        else if($('#user_role').val()=='librarian') {
+            $('#more2come').show();
+            $('#student_sub_form').hide();
+            $('#librarian_sub_form').show();
+            $('#librarian_name').required = true;
+            $('#library_name').required = true;
+        }
+        else {
+            $('#more2come').hide();
+            $('#student_sub_form').hide();
+            $('#librarian_sub_form').hide();
+        }
+    });
+
+    $('#mb_field').hide();
+    $('#student_education').change(function(){
+        if($('#user_student_education').val()=='Masters') {
+            $('#user_student_max_books').val(4);
+        }
+        else if ($('#user_student_education').val()=='Undergraduate') {
+            $('#user_student_max_books').val(2);
+        }
+        else if ($('#user_student_education').val()=='PhD') {
+            $('#user_student_max_books').val(6);
+        }
+        else $('#user_student_max_books').val(2);
+    });
+
+};
+
+$(document).ready(ready);
+$(document).on('turbolinks:load',ready);

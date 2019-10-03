@@ -5,3 +5,8 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+#
+
+# library = Library.create([{name: 'Hunt', university: 'NC State', location: 'Centennial Campus',
+#                            max_days: 10 }, {name: 'D. H. Hill', university: 'NC State', location: 'Main Campus',
+#                                             max_days: 10 }])

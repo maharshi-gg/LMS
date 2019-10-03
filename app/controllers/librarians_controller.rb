@@ -18,22 +18,11 @@ class LibrariansController < ApplicationController
     @librarians = policy_scope(Librarian)
     @librarians = Librarian.all
 
-    @libnamelist = []
-    @librarians.each do |lib|
-      arr=[]
-      arr.push(lib.email)
-      arr.push(lib.name)
-      arr.push(lib.password)
+    @library_dict = {}
+    @libs = Library.all
 
-      libno = lib.libraries_id
-      libname = Library.find(libno).name
-      puts(libname)
-      arr.push(libname)
-
-      @libnamelist.push(arr)
-
-      # push complete librarian object so show/edit/destroy methods can be shown.
-      @libnamelist.push(lib)
+    @libs.each do |l|
+      @library_dict[l.id] = l.name
     end
 
     authorize Librarian
@@ -80,7 +69,7 @@ class LibrariansController < ApplicationController
 
     respond_to do |format|
       if @librarian.save
-        format.html { redirect_to @librarian, notice: 'Librarian was successfully created.' }
+        format.html { redirect_to librarians_url, notice: 'Librarian was successfully created.' }
         format.json { render :show, status: :created, location: @librarian }
       else
         format.html { render :new }
@@ -95,7 +84,7 @@ class LibrariansController < ApplicationController
     authorize Librarian
     respond_to do |format|
       if @librarian.update(librarian_params)
-        format.html { redirect_to @librarian, notice: 'Librarian was successfully updated.' }
+        format.html { redirect_to librarians_url, notice: 'Librarian was successfully updated.' }
         format.json { render :show, status: :ok, location: @librarian }
       else
         format.html { render :edit }
@@ -108,10 +97,14 @@ class LibrariansController < ApplicationController
   # DELETE /librarians/1.json
   def destroy
     authorize Librarian
-    @librarian.destroy
+    # @librarian.destroy
     respond_to do |format|
-      format.html { redirect_to librarians_url, notice: 'Librarian was successfully destroyed.' }
-      format.json { head :no_content }
+      if @librarian.destroy
+        format.html { redirect_to librarians_url, notice: 'Librarian was successfully destroyed.' }
+        format.json { head :no_content }
+      else
+        format.html {redirect_to librarian_url, alert: 'Librarian was not successfully destroyed.'}
+      end
     end
   end
 

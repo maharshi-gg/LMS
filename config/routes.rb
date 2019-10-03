@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   # Refer: https://github.com/plataformatec/devise/wiki/How-To:-Require-authentication-for-all-pages
   # and https://github.com/plataformatec/devise/wiki/How-To:-Define-resource-actions-that-require-authentication-using-routes.rb
   authenticate :user do
+    root 'test_home_page#index'
     get 'homepage', to: 'test_home_page#index', as: 'user_homepage'
     get 'home/index'
     resources :admins
