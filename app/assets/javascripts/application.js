@@ -19,7 +19,9 @@
 //= require_self
 
 var ready = function () {
-    $('#more2come').hide();
+    // $('#more2come').hide();
+    $('#student_sub_form').show();
+    $('#librarian_sub_form').hide();
     //$('#lib2come').hide();
     $('#user_role').change(function(){
         if($('#user_role').val()=='user'){
@@ -47,15 +49,15 @@ var ready = function () {
     $('#mb_field').hide();
     $('#student_education').change(function(){
         if($('#user_student_education').val()=='Masters') {
-            $('#user_student_max_books').val(4);
+            $('#user_student_max_books').val = 4;
         }
         else if ($('#user_student_education').val()=='Undergraduate') {
-            $('#user_student_max_books').val(2);
+            $('#user_student_max_books').val = 2;
         }
         else if ($('#user_student_education').val()=='PhD') {
-            $('#user_student_max_books').val(6);
+            $('#user_student_max_books').val = 6;
         }
-        else $('#user_student_max_books').val(2);
+        else $('#user_student_max_books').val = 2;
     });
 
 };
