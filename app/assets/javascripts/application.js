@@ -26,16 +26,16 @@ var ready = function () {
             $('#more2come').show();
             $('#student_sub_form').show();
             $('#librarian_sub_form').hide();
-            $('#student_name').required(true);
-            $('#student_edcation').required(true);
-            $('#student_university').required(true);
+            $('#user_student_name').prop("required",true);
+            $('#user_student_education').prop("required",true);
+            $('#user_student_university').prop("required",true);
         }
         else if($('#user_role').val()=='librarian') {
             $('#more2come').show();
             $('#student_sub_form').hide();
             $('#librarian_sub_form').show();
-            $('#librarian_name').required = true;
-            $('#library_name').required = true;
+            $('#user_librarian_name').prop("required",true);
+            $('#user_library_name').prop("required",true);
         }
         else {
             $('#more2come').hide();

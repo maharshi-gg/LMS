@@ -6,13 +6,13 @@ class BooksController < ApplicationController
   def index
     @books = if (params[:search_by_title] || params[:search_by_author] || params[:search_by_subject] || params[:search_by_published_before] || params[:search_by_published_after])
                if (params[:search_by_published_before]!="" && params[:search_by_published_after]!="")
-                 Book.where('lower(title) LIKE ? and lower(author) LIKE ? and lower(subject) LIKE ? and published > ? and published < ?', "%#{params[:search_by_title]}%","%#{params[:search_by_author]}%","%#{params[:search_by_subject]}%","#{params[:search_by_published_before]}","#{params[:search_by_published_after]}")
+                 Book.where('lower(title) LIKE ? and lower(author) LIKE ? and lower(subject) LIKE ? and published > ? and published < ?', "%#{params[:search_by_title].downcase}%","%#{params[:search_by_author].downcase}%","%#{params[:search_by_subject].downcase}%","#{params[:search_by_published_before]}","#{params[:search_by_published_after]}")
                elsif (params[:search_by_published_before]!="")
-                 Book.where('lower(title) LIKE ? and lower(author) LIKE ? and lower(subject) LIKE ? and published < ?', "%#{params[:search_by_title]}%","%#{params[:search_by_author]}%","%#{params[:search_by_subject]}%","#{params[:search_by_published_before]}")
+                 Book.where('lower(title) LIKE ? and lower(author) LIKE ? and lower(subject) LIKE ? and published < ?', "%#{params[:search_by_title].downcase}%","%#{params[:search_by_author].downcase}%","%#{params[:search_by_subject].downcase}%","#{params[:search_by_published_before]}")
                elsif (params[:search_by_published_after]!="")
-                 Book.where('lower(title) LIKE ? and lower(author) LIKE ? and lower(subject) LIKE ? and published > ?', "%#{params[:search_by_title]}%","%#{params[:search_by_author]}%","%#{params[:search_by_subject]}%" ,"#{params[:search_by_published_after]}")
+                 Book.where('lower(title) LIKE ? and lower(author) LIKE ? and lower(subject) LIKE ? and published > ?', "%#{params[:search_by_title].downcase}%","%#{params[:search_by_author].downcase}%","%#{params[:search_by_subject].downcase}%" ,"#{params[:search_by_published_after]}")
                else
-                 Book.where('lower(title) LIKE ? and lower(author) LIKE ? and lower(subject) LIKE ?', "%#{params[:search_by_title]}%","%#{params[:search_by_author]}%","%#{params[:search_by_subject]}%")
+                 Book.where('lower(title) LIKE ? and lower(author) LIKE ? and lower(subject) LIKE ?', "%#{params[:search_by_title].downcase}%","%#{params[:search_by_author].downcase}%","%#{params[:search_by_subject].downcase}%")
                end
              else
                Book.all
