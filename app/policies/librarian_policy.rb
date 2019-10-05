@@ -52,4 +52,12 @@ class LibrarianPolicy < ApplicationPolicy
     current_user.admin?
   end
 
+
+  def list_special_book_request?
+    current_user.admin? or current_user.librarian?
+  end
+
+  def approve_book_request?
+    current_user.admin? or current_user.librarian?
+  end
 end

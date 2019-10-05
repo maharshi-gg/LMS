@@ -22,7 +22,9 @@ Rails.application.routes.draw do
 
   root 'home#index'
   get 'page2', to: 'page2#index', as: 'page2'
-
+  get 'book_request', to: 'books#book_request', as: 'book_request'
+  get 'list_special_book_request', to: 'librarians#list_special_book_request', as: 'list_special_book_request'
+  get 'approve_book_request', to: 'librarians#approve_book_request', as: 'approve_book_request'
   devise_for :users, :controllers => { registrations: 'registrations'}
 
 

@@ -3,6 +3,8 @@ class LibrariansController < ApplicationController
   # skip_before_action :verify_authenticity_token
   after_action :verify_authorized
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
+  helper_method :approve_book_request
+
 
   # GET /librarians
   # GET /librarians.json
@@ -91,6 +93,20 @@ class LibrariansController < ApplicationController
         format.json { render json: @librarian.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  def list_special_book_request
+    authorize Librarian
+    query = "select * from book_request"
+    #@book_request = BookRequest.find(query)
+    @book_request = BookRequest.all.where(is_approved: 'false')
+  end
+
+  def approve_book_request
+    authorize Librarian
+    @book_request = BookRequest.find(params[:id])
+   # query = "update book_request"
+    @book_request.update_attribute(:is_approved,"true")
   end
 
   # DELETE /librarians/1

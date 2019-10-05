@@ -60,7 +60,21 @@ class BooksController < ApplicationController
       @results = Book.all.where("lower(title) LIKE :search", search: @parameter)
       end
 
+  end
+
+  def book_request
+    @book = Book.find(params[:id])
+    @student = Student.find_by_email(current_user.email)
+    if(@book.special_collection == "true")
+        @is_approved_1 = false
+    else @is_approved_1 = true
     end
+    query = "INSERT INTO book_request (date,is_special,is_approved,books_id, students_id) VALUES
+                                      ('#{Date.today}','#{@book.special_collection}','#{@is_approved_1}','#{@book.id}','#{@student.id}')"
+    BookRequest.connection.execute(query)
+  end
+
+  helper_method :book_request
   # PATCH/PUT /books/1
   # PATCH/PUT /books/1.json
   def update
