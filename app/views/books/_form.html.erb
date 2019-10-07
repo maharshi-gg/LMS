@@ -28,8 +28,13 @@
   </p>
 
   <p>
+    <%= f.label :count_book %><br>
+    <%= f.number_field :book_count, :class => 'text_field' %>
+  </p>
+
+  <p>
     <%= f.label :language %><br>
-    <%= f.select(:language, options_for_select([['English', 'English']])) %>
+    <%= f.select(:language, options_for_select([['English', 'English'], ['French', 'French'], ['German', 'German'], ['Russian', 'Russian'], ['Hindi', 'Hindi'], ['Gujarati', 'Gujarati'], ['Marathi', 'Marathi'], ['Kannada', 'Kannada'], ['Telugu', 'Telugu'], ['Tamil', 'Tamil']])) %>
   </p>
 
   <p>
@@ -48,8 +53,12 @@
   </p>
 
   <p>
-    <%= f.label :summary %><br>
-    <%= f.text_field :summary %>
+    <%= f.file_field :image %>
+  </p>
+
+  <p>
+    <%= f.label :library_name %><br>
+    <%= f.select :libraries_id, options_for_select(Library.all.map{ |l| [l.name, l.id] }) %>
   </p>
 
   <p>
@@ -58,14 +67,15 @@
   </p>
 
   <p>
-    <%= f.label :count_book %><br>
-    <%= f.number_field :book_count, :class => 'text_field' %>
+    <%= f.label :summary %><br>
+    <%= f.text_field :summary %>
   </p>
 
-  <p>
-    <%= f.label :library_name %><br>
-    <%= f.select :libraries_id, options_for_select(Library.all.map{ |l| [l.name, l.id] }) %>
-  </p>
+
+
+
+
+
 
   <!--    <p>-->
   <%#= f.submit %>

@@ -78,6 +78,10 @@ class StudentsController < ApplicationController
     end
   end
 
+  def find_student_id(email)
+    return Student.find_by_email(email)
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_student

@@ -5,7 +5,6 @@ class LibrariansController < ApplicationController
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
   helper_method :approve_book_request
 
-
   # GET /librarians
   # GET /librarians.json
   def index
@@ -40,6 +39,14 @@ class LibrariansController < ApplicationController
     #   end
     # end
     # @users = Librarian.all
+    #
+    @library_dict = {}
+    @libs = Library.all
+
+    @libs.each do |l|
+      @library_dict[l.id] = l.name
+    end
+
     authorize Librarian
     # @user = User.find(params[:id])
     # unless current_user.librarian?

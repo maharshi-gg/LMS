@@ -55,5 +55,5 @@
 <% if not current_user.user? %>
   <%= link_to 'New Book', new_book_path %>
 <% end %>
-<%= link_to 'View All Books', books_path %>
-<%= link_to 'Back', user_homepage_path %>
+<%= link_to 'View All Books', books_path %><br>
+<br><%= link_to 'Back', home_index_path %> |

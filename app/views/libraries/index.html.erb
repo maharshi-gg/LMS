@@ -31,6 +31,8 @@
 
 <br>
 <% if current_user.librarian? || current_user.admin? %>
-<%= link_to 'New Library', new_library_path %>
+<%= link_to 'New Library', new_library_path %><br>
 <% end %>
-<%= link_to 'Back', user_homepage_path %>
+
+
+<br><%= link_to 'Back', home_index_path %> |

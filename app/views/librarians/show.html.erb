@@ -1,5 +1,7 @@
 <p id="notice"><%= notice %></p>
 
+<h2>Librarian Profile</h2><br>
+
 <p>
   <strong>Email:</strong>
   <%= @librarian.email %>
@@ -11,10 +13,10 @@
 </p>
 
 <p>
-  <strong>Password:</strong>
-  <i>Hidden Field</i>
+  <strong>Library:</strong>
+  <%= @library_dict[@librarian.libraries_id] %>
 </p>
 
-
-<%= link_to 'Edit', edit_librarian_path(@librarian) %> |
-<%= link_to 'Back', librarians_path %>
+<br><%= link_to 'Change Password', edit_user_registration_path %><br>
+<%= link_to 'Edit', edit_librarian_path(@librarian) %><br>
+<%= link_to 'Back', librarians_path %> |

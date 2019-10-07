@@ -9,7 +9,8 @@ class TestHomePageController < ApplicationController
 
   def admin_only
     unless current_user.admin?
-      redirect_to home_index_path , :alert => "Access denied."
+      puts(" in admin only")
+      redirect_to home_index_path , :alert => "Access denied !"
     end
   end
 end
