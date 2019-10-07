@@ -49,15 +49,45 @@ var ready = function () {
     $('#mb_field').hide();
     $('#student_education').change(function(){
         if($('#user_student_education').val()=='Masters') {
-            $('#user_student_max_books').val = 4;
+            $('#user_student_max_books').val(4);
         }
         else if ($('#user_student_education').val()=='Undergraduate') {
-            $('#user_student_max_books').val = 2;
+            $('#user_student_max_books').val(2);
         }
         else if ($('#user_student_education').val()=='PhD') {
-            $('#user_student_max_books').val = 6;
+            $('#user_student_max_books').val(6);
         }
-        else $('#user_student_max_books').val = 2;
+        else $('#user_student_max_books').val(2);
+    });
+
+    $('#user_password, #user_password_confirmation').on('keyup',function(){
+        if($('#user_password').val() == $('#user_password_confirmation').val()){
+            $('#user_message').html('Passwords Match!').css('color','green');
+            $('#user_submit').prop('disabled',false);
+        } else{
+            $('#user_message').html('Passwords do NOT match!!!').css('color','red');
+            $('#user_submit').prop('disabled',true);
+        }
+    });
+
+    $('#librarian_password, #librarian_password_confirmation').on('keyup',function(){
+        if($('#librarian_password').val() == $('#librarian_password_confirmation').val()){
+            $('#librarian_message').html('Passwords Match!').css('color','green');
+            $('#librarian_submit').prop('disabled',false);
+        } else{
+            $('#librarian_message').html('Passwords do NOT match!!!').css('color','red');
+            $('#librarian_submit').prop('disabled',true);
+        }
+    });
+
+    $('#student_password, #student_password_confirmation').on('keyup',function(){
+        if($('#student_password').val() == $('#student_password_confirmation').val()){
+            $('#student_message').html('Passwords Match!').css('color','green');
+            $('#student_submit').prop('disabled',false);
+        } else{
+            $('#student_message').html('Passwords do NOT match!!!').css('color','red');
+            $('#student_submit').prop('disabled',true);
+        }
     });
 
 };

@@ -48,14 +48,21 @@ class StudentsController < ApplicationController
   def update
     authorize Student
     respond_to do |format|
-      if @student.update(student_params)
-        @user = User.find_by_email(@student.email)
-        @user.update({email: @student.email,name:@student.name})
-        format.html { redirect_to @student, notice: 'Student was successfully updated.' }
-        format.json { render :show, status: :ok, location: @student }
+      if student_params[:password]==params[:student][:password_confirmation]
+        if @student.update(student_params)
+          @user = User.find_by_email(current_user.email)
+          @user.update({email: @student.email, password: @student.password, password_confirmation: @student.password})
+          format.html { redirect_to @student, notice: 'Student was successfully updated.' }
+          format.json { render :show, status: :ok, location: @student }
+        else
+          format.html { render :edit }
+          flash.now[:alert] = 'Passwords do not match!'
+          format.json { render json: @student.errors, status: :unprocessable_entity }
+        end
       else
         format.html { render :edit }
-        format.json { render json: @student.errors, status: :unprocessable_entity }
+        flash.now[:alert] = 'Passwords do not match!'
+        format.json { render json: @librarian.errors, status: :unprocessable_entity }
       end
     end
   end

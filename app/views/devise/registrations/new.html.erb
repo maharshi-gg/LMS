@@ -21,6 +21,10 @@
     <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
   </div>
 
+  <div>
+    <span id="user_message"></span>
+  </div>
+
   <div class="field">
     <%= f.label "Role" %>
     <%= f.select(:role, options_for_select([['Student', 'user'], ['Librarian', 'librarian']]))%>
@@ -28,7 +32,7 @@
 
 
   <!--  <div class="sub_form" id="lib2come">-->
-  <%#= render 'lib_form', librarian: @librarian %>
+  <%#= render 'lib_form', librarian: @librarian %>`
   <!--  </div>-->
   <div class="sub_form" id="more2come">
     <div class="sub_form" id="librarian_sub_form">
@@ -72,7 +76,7 @@
   </div>
 
   <div class="actions">
-    <%= f.submit "Sign up" %>
+    <%= f.submit "Sign up", :id=>"user_submit"%>
   </div>
 <% end %>
 

@@ -4,7 +4,7 @@ class RegistrationsController < Devise::RegistrationsController
 
     # @user = User.new(sign_up_params)
     # @user.save
-    respond_to do |format|
+    # respond_to do |format|
     if sign_up_params[:role]=='user'
         @stud = Student.find_by_email(sign_up_params[:email])
         if @stud.nil?
@@ -13,6 +13,7 @@ class RegistrationsController < Devise::RegistrationsController
                               university: params[:user][:student][:university], max_books: params[:user][:student][:max_books])
           @stud.save
           super and return
+          redirect_to :student, notice: 'Successfully signed up as Student.'
         else
           # @stud.update(student_signup_params)
           # format.html { redirect_to students_path, notice: 'Student was successfully created.' }
@@ -33,8 +34,8 @@ class RegistrationsController < Devise::RegistrationsController
           # format.json { render :show, status: :created, location: @librarian }
         end
       end
-    end
-
+    # end
+    redirect_to :user_homepage_path, 'Redirected to user homepage.'
     # @user = User.find_by_email(current_user.email)
     # # if current_user.librarian?
     # #   @user.update({libraries_id: @lib.libraries_id})
