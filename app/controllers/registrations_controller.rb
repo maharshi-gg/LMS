@@ -4,7 +4,7 @@ class RegistrationsController < Devise::RegistrationsController
 
     # @user = User.new(sign_up_params)
     # @user.save
-    # respond_to do |format|
+    respond_to do |format|
     if sign_up_params[:role]=='user'
         @stud = Student.find_by_email(sign_up_params[:email])
         if @stud.nil?
@@ -12,6 +12,7 @@ class RegistrationsController < Devise::RegistrationsController
                               password: sign_up_params[:password], education: params[:user][:student][:education],
                               university: params[:user][:student][:university], max_books: params[:user][:student][:max_books])
           @stud.save
+          super and return
         else
           # @stud.update(student_signup_params)
           # format.html { redirect_to students_path, notice: 'Student was successfully created.' }
@@ -21,16 +22,27 @@ class RegistrationsController < Devise::RegistrationsController
         @lib = Librarian.find_by_email(sign_up_params[:email])
         if(@lib.nil?)
           @lib = Librarian.new(email: sign_up_params[:email], name: params[:user][:librarian][:name],
-                               password: sign_up_params[:password], libraries_id: params[:user][:librarian][:libraries_id])
+                               password: sign_up_params[:password], libraries_id: params[:user][:librarian][:libraries_id],
+                               approved: false)
           @lib.save
+          format.html {redirect_to home_index_path, notice: 'Request has been sent. Pending admin approval.'};
+          format.json { render :show, status: :accepted, location: home_index_path}
         else
-          @lib.update(librarian_signup_parmas)
+          # @lib.update(librarian_signup_parmas)
           # format.html { redirect_to librarians_path, notice: 'Student was successfully created.' }
           # format.json { render :show, status: :created, location: @librarian }
         end
+      end
     end
-    super and return
-    # if @user.save
+
+    # @user = User.find_by_email(current_user.email)
+    # # if current_user.librarian?
+    # #   @user.update({libraries_id: @lib.libraries_id})
+    # # else
+    #   if current_user.user?
+    #   @user.update({students_id: @stud.user_id})
+    # end
+    # # if @user.save
     #   format.html { redirect_to @user, notice: 'Student was successfully created.' }
     #   format.json { render :show, status: :created, location: @user }
     #  else

@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.6.4'
+ruby '2.6.3'
 
 gem 'devise'
 
@@ -12,9 +12,11 @@ gem 'rails', '~> 5.2.3'
 
 gem 'pg'
 
-gem 'taps'
+gem "rubyzip", ">= 1.3.0"
 
 gem 'jquery-rails'
+
+gem "rest-client", ">= 1.8.0"
 
 # Use Puma as the app server
 gem 'puma', '~> 3.11'
@@ -71,7 +73,5 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'pundit'
-
-gem 'wdm'
 
 gem 'coffee-script-source', '1.8.0'

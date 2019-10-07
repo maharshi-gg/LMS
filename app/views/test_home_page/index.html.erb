@@ -9,3 +9,6 @@
 <%= link_to 'Students', students_path %><br>
 <%= link_to 'Libraries',  libraries_path %><br>
 <%= link_to 'Books',books_path %><br><br>
+<% if current_user.admin? %>
+  <%= link_to 'Admins',admins_path %><br><br>
+<% end %>

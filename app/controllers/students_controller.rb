@@ -49,6 +49,8 @@ class StudentsController < ApplicationController
     authorize Student
     respond_to do |format|
       if @student.update(student_params)
+        @user = User.find_by_email(@student.email)
+        @user.update({email: @student.email,name:@student.name})
         format.html { redirect_to @student, notice: 'Student was successfully updated.' }
         format.json { render :show, status: :ok, location: @student }
       else

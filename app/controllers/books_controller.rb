@@ -69,9 +69,14 @@ class BooksController < ApplicationController
         @is_approved_1 = false
     else @is_approved_1 = true
     end
+    @req = BookRequest.find_by_sql(["select * from book_request where students_id = ? AND books_id = ?",@student.id,@book.id])
+    if @req.nil?
     query = "INSERT INTO book_request (date,is_special,is_approved,books_id, students_id) VALUES
                                       ('#{Date.today}','#{@book.special_collection}','#{@is_approved_1}','#{@book.id}','#{@student.id}')"
     BookRequest.connection.execute(query)
+      redirect_to(@book_requests_path, notice: "list of all books collected.")
+    else redirect_to(root_path, alert: "already requested or collected.");
+    end
   end
 
   helper_method :book_request

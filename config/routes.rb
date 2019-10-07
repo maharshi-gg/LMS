@@ -25,6 +25,8 @@ Rails.application.routes.draw do
   get 'book_request', to: 'books#book_request', as: 'book_request'
   get 'list_special_book_request', to: 'librarians#list_special_book_request', as: 'list_special_book_request'
   get 'approve_book_request', to: 'librarians#approve_book_request', as: 'approve_book_request'
+  get 'approve_librarian', to: 'admins#approve_librarian', as: 'approve_librarian'
+  get 'librarian_requests', to: 'admins#librarian_requests', as: 'librarian_requests'
   devise_for :users, :controllers => { registrations: 'registrations'}
 
 

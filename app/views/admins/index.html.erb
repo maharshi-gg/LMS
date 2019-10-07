@@ -16,11 +16,12 @@
     <% @admins.each do |admin| %>
       <tr>
         <td><%= admin.email %></td>
-        <td><%= admin.name %></td>
+<!--        <td><%#= admin.name %></td>-->
         <td><%= admin.password %></td>
-        <td><%= link_to 'Show', admin %></td>
+<!--        <td><%#= link_to 'Approve', admin %></td>-->
         <td><%= link_to 'Edit', edit_admin_path(admin) %></td>
-        <td><%= link_to 'Destroy', admin, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+
+<!--        <td><%#= link_to 'Destroy', admin, method: :delete, data: { confirm: 'Are you sure?' } %></td>-->
       </tr>
     <% end %>
   </tbody>
@@ -29,3 +30,4 @@
 <br>
 
 <%= link_to 'New Admin', new_admin_path %>
+<%= link_to 'Approve', librarian_requests_path %>

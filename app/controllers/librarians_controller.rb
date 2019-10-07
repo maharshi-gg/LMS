@@ -71,8 +71,8 @@ class LibrariansController < ApplicationController
 
     respond_to do |format|
       if @librarian.save
-        format.html { redirect_to librarians_url, notice: 'Librarian was successfully created.' }
-        format.json { render :show, status: :created, location: @librarian }
+        format.html { redirect_to user_homepage_path, notice: 'Request sent to Admin was authorisation.' }
+        format.json { render :show, status: :created, location: user_homepage_path }
       else
         format.html { render :new }
         format.json { render json: @librarian.errors, status: :unprocessable_entity }
@@ -86,6 +86,8 @@ class LibrariansController < ApplicationController
     authorize Librarian
     respond_to do |format|
       if @librarian.update(librarian_params)
+        @user = User.find_by_email(current_user.email)
+        @user.update({email: @librarian.email})
         format.html { redirect_to librarians_url, notice: 'Librarian was successfully updated.' }
         format.json { render :show, status: :ok, location: @librarian }
       else
