@@ -12,12 +12,8 @@ gem 'rails', '~> 5.2.3'
 
 gem 'pg'
 
-gem "rubyzip", ">= 1.3.0"
-
 gem 'jquery-rails'
-
 gem "rest-client", ">= 1.8.0"
-
 # Use Puma as the app server
 gem 'puma', '~> 3.11'
 # Use SCSS for stylesheets

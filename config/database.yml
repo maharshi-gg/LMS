@@ -23,8 +23,8 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: db/lol3_development
+  database: db/test
 
 production:
   <<: *default
-  database: db/lol3
+  database: db/production

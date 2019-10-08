@@ -21,19 +21,10 @@
     <%= form.text_field :name , :required => true%>
   </div>
 
-  <div class="field">
-    <%= form.label :password %>
-    <%= form.password_field :password, :required => true%>
-  </div>
-
-  <div class="field">
-    <%= form.label :password_confirmation %>
-    <%= form.password_field :password_confirmation, :required => true%>
-  </div>
-
-  <div>
-    <span id="librarian_message"></span>
-  </div>
+<!--  <div class="field">-->
+    <%#= form.label :password %>
+    <%#= form.password_field :password, :required => true%>
+<!--  </div>-->
 
 <!--  <div class="field">-->
 <!--    <%#= form.label :library %><br>-->
@@ -46,6 +37,6 @@
   </div>
 
   <div class="actions">
-    <%= form.submit :id=>"librarian_submit"%>
+    <%= form.submit %>
   </div>
 <% end %>

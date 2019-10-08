@@ -92,19 +92,11 @@ class LibrariansController < ApplicationController
   def update
     authorize Librarian
     respond_to do |format|
-      if librarian_params[:password]==params[:librarian][:password_confirmation]
-        if @librarian.update(librarian_params)
-          @user = User.find_by_email(current_user.email)
-          @user.update({email: @librarian.email,password:@librarian.password,password_confirmation:@librarian.password})
-          format.html { redirect_to librarians_url, notice: 'Librarian was successfully updated.' }
-          format.json { render :show, status: :ok, location: @librarian }
-        else
-          format.html { render :edit }
-          format.json { render json: @librarian.errors, status: :unprocessable_entity }
-        end
+      if @librarian.update(librarian_params)
+        format.html { redirect_to librarians_url, notice: 'Librarian was successfully updated.' }
+        format.json { render :show, status: :ok, location: @librarian }
       else
         format.html { render :edit }
-        flash.now[:alert] = 'Passwords do not match!'
         format.json { render json: @librarian.errors, status: :unprocessable_entity }
       end
     end

@@ -24,6 +24,7 @@ class LibrariesController < ApplicationController
   # POST /libraries
   # POST /libraries.json
   def create
+    puts(library_params)
     @library = Library.new(library_params)
 
     respond_to do |format|
@@ -69,6 +70,6 @@ class LibrariesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def library_params
-      params.require(:library).permit(:name, :university, :location, :max_days)
+      params.require(:library).permit(:name, :university, :location, :max_days, :fines)
     end
 end

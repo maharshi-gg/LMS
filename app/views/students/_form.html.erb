@@ -21,20 +21,6 @@
     <%= form.text_field :name, :required => true %>
   </div>
 
-  <div class="field">
-    <%= form.label :password %>
-    <%= form.password_field :password, :required => true %>
-  </div>
-
-  <div class="field">
-    <%= form.label :password_confirmation %>
-    <%= form.password_field :password_confirmation, :required => true %>
-  </div>
-
-  <div>
-    <span id="student_message"></span>
-  </div>
-
   <% if student.education == "" || student.education.nil? %>
   <div class="field">
     <%= form.label :education %>
@@ -53,6 +39,6 @@
   </div>
 
   <div class="actions">
-    <%= form.submit :id=>"student_submit" %>
+    <%= form.submit %>
   </div>
 <% end %>

@@ -52,8 +52,9 @@
 </table>
 
 <br>
-<% if not current_user.user? %>
+<% unless current_user.user? %>
   <%= link_to 'New Book', new_book_path %>
 <% end %>
-<%= link_to 'View All Books', books_path %><br>
+
+<!--<%#= link_to 'View All Books', books_path %><br>-->
 <br><%= link_to 'Back', home_index_path %> |
