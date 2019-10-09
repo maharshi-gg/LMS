@@ -50,6 +50,7 @@
 <%= link_to 'View Books', books_path %><br>
 <%= link_to 'View Special Book Requests', list_special_book_request_path %><br>
 
+
 <% if current_user.librarian? %>
   <br><%= link_to 'My Profile', Librarian.find_by_email(current_user.email) %><br>
 <% end %>

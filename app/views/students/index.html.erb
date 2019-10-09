@@ -74,6 +74,8 @@
 
 <%= link_to 'View Libraries',  libraries_path %><br>
 <%= link_to 'View Books', books_path %><br>
+<%= link_to 'Requested Books', requests_path %><br>
+<%= link_to 'View Hold/Pending Approval Requests', hold_requests_path %>
 
 <% if current_user.user? %>
   <br><%= link_to 'My Profile', Student.find_by_email(current_user.email) %><br>

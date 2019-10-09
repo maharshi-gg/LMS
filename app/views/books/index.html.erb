@@ -10,9 +10,6 @@
   Search by Published After<%= date_field_tag :search_by_published_after %>
   <%= submit_tag 'Search' %>
 <% end %>
-
-
-
 <table>
   <thead>
   <tr>
@@ -22,6 +19,7 @@
     <th>Subject</th>
     <th>Published on</th>
     <th>Book Count</th>
+    <th>Available Count</th>
     <% if current_user.user? %>>
       <th>Request Book</th>
     <% end %>
@@ -39,6 +37,7 @@
       <td><%= book.subject %></td>
       <td><%= book.published %></td>
       <td><%= book.book_count %></td>
+      <td><%= book.available_count %></td>
 
 
       <% if current_user.admin? or current_user.librarian? %>
@@ -48,6 +47,7 @@
       <% end %>
       <% if current_user.user? %>>
         <td><%= link_to 'Request Book',book_request_path(book, :id => book.id) %></td>
+
       <% end %>
     </tr>
   <% end %>

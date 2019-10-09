@@ -14,7 +14,7 @@
     <th>Student Name</th>
     <th>Librarians_ID</th>
     <th>Approve</th>
-    <th>Deny</th>
+<!--    <th>Deny</th>-->
   </tr>
   </thead>
   <tbody>
@@ -29,7 +29,7 @@
         <td><%= Student.find_by_id(book_request['students_id']).name %></td>
         <td><%= book_request['librarians_id'] %></td>
         <td><%= link_to 'Approve', approve_book_request_path(book_request, id: book_request.id)  %></td>
-        <td><%= link_to 'Deny', data: { confirm: 'Are you sure to deny this request?' } %></td>
+<!--        <td><%#= link_to 'Deny', data: { confirm: 'Are you sure to deny this request?' } %></td>-->
       </tr>
     <% end %>
 

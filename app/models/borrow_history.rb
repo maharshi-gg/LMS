@@ -1,0 +1,2 @@
+class BorrowHistory < ApplicationRecord
+end
