@@ -31,9 +31,17 @@ class StudentsController < ApplicationController
   def create
     authorize Student
     @student = Student.new(student_params)
-
+    @user = User.new({email:@student.email,password:@student.password,password_confirmation:@student.password})
     respond_to do |format|
       if @student.save
+        if(@student[:education]=="Masters")
+          @student.update({max_books:4})
+        elsif (@student[:education]=="PhD")
+           @student.update({max_books:6})
+        else
+          @student.update({max_books:2})
+        end
+        @user.save
         format.html { redirect_to @student, notice: 'Student was successfully created.' }
         format.json { render :show, status: :created, location: @student }
       else
@@ -47,8 +55,10 @@ class StudentsController < ApplicationController
   # PATCH/PUT /students/1.json
   def update
     authorize Student
+    @user = User.find_by_email(@student.email)
     respond_to do |format|
       if @student.update(student_params)
+        @user.update({email:@student.email})
         format.html { redirect_to @student, notice: 'Student was successfully updated.' }
         format.json { render :show, status: :ok, location: @student }
       else

@@ -22,9 +22,11 @@
     <th>Subject</th>
     <th>Published on</th>
     <th>Book Count</th>
-    <%# if current_user.user? %>
-<!--      <th>Request Book</th>-->
-    <%# end %>
+    <th>Available Count</th>
+    <% if current_user.user? %>>
+      <th>Request Book</th>
+    <% end %>
+
     <th colspan="3"></th>
   </tr>
   </thead>
@@ -38,6 +40,7 @@
       <td><%= book.subject %></td>
       <td><%= book.published %></td>
       <td><%= book.book_count %></td>
+      <td><%= book.available_count %></td>
 
 
       <% if current_user.admin? or current_user.librarian? %>
@@ -49,6 +52,7 @@
         <td><%= link_to 'Show', book %></td>
         <td><%= link_to 'Bookmark', bookmarked_path(book, :id => book.id) %></td>
         <td><%= link_to 'Request Book',book_request_path(book, :id => book.id) %></td>
+
       <% end %>
     </tr>
   <% end %>

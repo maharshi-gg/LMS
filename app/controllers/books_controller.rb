@@ -38,11 +38,13 @@ class BooksController < ApplicationController
   # POST /books.json
   def create
     # render plain: params[:book].inspect
-    puts(book_params)
+
     @book = Book.new(book_params)
 
     respond_to do |format|
       if @book.save
+        # @book.available_count = book_params[:book_count]
+        @book.update_attribute(:available_count,book_params[:book_count])
         format.html { redirect_to @book, notice: 'Book was successfully created.' }
         format.json { render :show, status: :created, location: @book }
       else
@@ -65,19 +67,51 @@ class BooksController < ApplicationController
 
   def book_request
     @book = Book.find(params[:id])
+    @current_count = @book.available_count
     @student = Student.find_by_email(current_user.email)
-    if(@book.special_collection == "true")
-        @is_approved_1 = false
-    else @is_approved_1 = true
-    end
-    @req = BookRequest.find_by_sql(["select * from book_request where students_id = ? AND books_id = ?",@student.id,@book.id])
-    if @req.nil?
-    query = "INSERT INTO book_request (date,is_special,is_approved,books_id, students_id) VALUES
-                                      ('#{Date.today}','#{@book.special_collection}','#{@is_approved_1}','#{@book.id}','#{@student.id}')"
-    BookRequest.connection.execute(query)
-      redirect_to(@book_requests_path, notice: "list of all books collected.")
-    else redirect_to(root_path, alert: "already requested or collected.");
-    end
+    @max_book_allowed = @student.max_books
+
+    if (@current_count > 0)
+        @current_count = @current_count-1
+
+
+
+        @issued_books_count = BookRequest.count_by_sql(['select count(*) from book_request where
+                                                             students_id = ?',@student.id])
+          if ((@issued_books_count+1) <= @max_book_allowed)
+              @is_approved_1 = true
+              if(@book.special_collection == true)
+                  @is_approved_1 = false
+              end
+              @req = BookRequest.find_by_sql(["select * from book_request where students_id = ? AND books_id = ?",@student.id,@book.id])
+              if @req.empty?
+              query = "INSERT INTO book_request (date,is_special,is_approved,books_id, students_id,hold) VALUES
+                                                ('#{Date.today}','#{@book.special_collection}','#{@is_approved_1}','#{@book.id}','#{@student.id}','#{false}')"
+              BookRequest.connection.execute(query)
+              if(@is_approved_1 == true)
+                @borrow_history = BorrowHistory.new(:date => Date.today, :is_special => @book.special_collection, :books_id => @book.id, :students_id => @student.id, :status => "Book Checked Out")
+                @borrow_history.save
+              end
+              redirect_to(requests_path, notice: "List of all books collected.")
+              else redirect_to(root_path, alert: "Already requested or collected.");
+              end
+                 @book.update_attribute(:available_count, @current_count)
+          else
+            redirect_to(root_path, alert: "Maximum allowed books has been reached for your account - "+@max_book_allowed.to_s)
+          end
+
+    else
+      @req = BookRequest.find_by_sql(["select * from book_request where students_id = ? AND books_id = ?",@student.id,@book.id])
+      if @req.empty?
+      query = "INSERT INTO book_request (date,is_special,is_approved,books_id, students_id,hold) VALUES
+                                                ('#{Date.today}','#{@book.special_collection}','#{false}','#{@book.id}','#{@student.id}','#{true}')"
+      BookRequest.connection.execute(query)
+      redirect_to(root_path, alert: "Book has been exhausted, and kept on request for Hold.")
+      else redirect_to(root_path, alert: "Already placed on hold.");
+      end
+
+      end
+
   end
 
   def bookmarked
