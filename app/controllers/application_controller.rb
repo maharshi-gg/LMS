@@ -10,5 +10,8 @@ class ApplicationController < ActionController::Base
   #   return unless session[:user_id]
   #   @current_user ||= User.find(session[:user_id])
   # end
-
+  protected
+  def redirect_to_default
+    redirect_to root_url
+  end
 end

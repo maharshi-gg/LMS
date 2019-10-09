@@ -12,8 +12,8 @@ gem 'rails', '~> 5.2.3'
 
 gem 'pg'
 
-gem 'taps'
-
+gem 'jquery-rails'
+gem "rest-client", ">= 1.8.0"
 # Use Puma as the app server
 gem 'puma', '~> 3.11'
 # Use SCSS for stylesheets
@@ -69,3 +69,5 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'pundit'
+
+gem 'coffee-script-source', '1.8.0'

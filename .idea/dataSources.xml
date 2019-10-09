@@ -2,7 +2,7 @@
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
     <data-source source="LOCAL" name="development_old" uuid="95aae305-fed9-4481-a07d-27375e35da67">
-      <driver-ref>sqlite.xerial</driver-ref>
+      <driver-ref>703d6b55-a9c6-4bf9-b09b-412e178ef074</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
       <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/db/development_old.sqlite3</jdbc-url>
@@ -25,7 +25,7 @@
       </libraries>
     </data-source>
     <data-source source="LOCAL" name="development" uuid="adb36672-491e-46e1-940c-bb47213797c3">
-      <driver-ref>sqlite.xerial</driver-ref>
+      <driver-ref>703d6b55-a9c6-4bf9-b09b-412e178ef074</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
       <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/db/development.sqlite3</jdbc-url>
@@ -64,6 +64,18 @@
       <synchronize>true</synchronize>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
       <jdbc-url>jdbc:postgresql://localhost:5432/db/lol3_development_again</jdbc-url>
+    </data-source>
+    <data-source source="LOCAL" name="LMS_OODD_4@localhost" uuid="2c8d0e1a-a70e-40b1-9d53-08c2c161de8c">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://localhost:5432/db/LMS_OODD_4</jdbc-url>
+    </data-source>
+    <data-source source="LOCAL" name="postgredb" uuid="801da8e1-a2e1-4b49-9c65-7caa892d0de2">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://localhost:5432/db/LMS_OODD_4</jdbc-url>
     </data-source>
   </component>
 </project>

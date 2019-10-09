@@ -1,3 +1,3 @@
 class Library < ApplicationRecord
-  has_many :librarians
+  # has_many :librarians
 end

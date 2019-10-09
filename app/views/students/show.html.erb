@@ -1,5 +1,8 @@
 <p id="notice"><%= notice %></p>
 
+<h2>Student Profile:</h2><br>
+
+
 <p>
   <strong>Email:</strong>
   <%= @student.email %>
@@ -10,10 +13,10 @@
   <%= @student.name %>
 </p>
 
-<p>
-  <strong>Password:</strong>
-  <%= @student.password %>
-</p>
+<!--<p>-->
+<!--  <strong>Password:</strong>-->
+  <%#= @student.password %>
+<!--</p>-->
 
 <p>
   <strong>Education:</strong>
@@ -30,5 +33,6 @@
   <%= @student.max_books %>
 </p>
 
-<%= link_to 'Edit', edit_student_path(@student) %> |
-<%= link_to 'Back', students_path %>
+<br><%= link_to 'Change Password', edit_user_registration_path %><br>
+<%= link_to 'Edit Profile', edit_student_path(@student) %><br>
+<br><%= link_to 'Back', students_path %> |

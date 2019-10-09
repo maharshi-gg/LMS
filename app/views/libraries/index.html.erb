@@ -9,6 +9,7 @@
     <th>University</th>
     <th>Location</th>
     <th>Borrowing Days Limit</th>
+    <th>Fines</th>
     <th colspan="6"></th>
   </tr>
   </thead>
@@ -22,14 +23,19 @@
         <td><%= library.max_days %></td>
         <td><%= library.fines %></td>
         <td><%= link_to 'Show', library %></td>
-        <td><%= link_to 'Edit', edit_library_path(library) %></td>
-        <td><%= link_to 'Destroy', library, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% if current_user.admin? or current_user.librarian? %>
+          <td><%= link_to 'Edit', edit_library_path(library) %></td>
+          <td><%= link_to 'Destroy', library, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
 </table>
 
 <br>
+<% if current_user.librarian? || current_user.admin? %>
+<%= link_to 'New Library', new_library_path %><br>
+<% end %>
 
-<%= link_to 'New Library', new_library_path %>
-<%= link_to 'Back', librarians_path %>>
+
+<br><%= link_to 'Back', home_index_path %> |
