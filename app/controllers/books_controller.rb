@@ -38,7 +38,7 @@ class BooksController < ApplicationController
   # POST /books.json
   def create
     # render plain: params[:book].inspect
-
+    puts(book_params)
     @book = Book.new(book_params)
 
     respond_to do |format|
@@ -78,6 +78,82 @@ class BooksController < ApplicationController
       redirect_to(@book_requests_path, notice: "list of all books collected.")
     else redirect_to(root_path, alert: "already requested or collected.");
     end
+  end
+
+  def bookmarked
+    @book = Book.find(params[:id])
+    @user = User.find_by_email(current_user.email) # @student = Student.find_by_email(current_user.email)
+
+    @records = Bookmark.where(books_id: @book.id, users_id: @user.id)
+
+    if @records.blank?
+      @bookmark = Bookmark.new(:books_id=>@book.id, :users_id=>@user.id)
+      if @bookmark.save
+        redirect_to books_path, notice: 'Bookmark created successfully !' and return
+      else
+        flash[:notice] = 'Database Error !'
+      end
+    else
+      flash[:notice] = 'Bookmark has already been created !'
+    end
+
+
+
+    # # @records = Bookmark.find_by({:books_id=>@book.id, :users_id=>@user.id})
+    # if @records.nil?
+    #   @bookmark = Bookmark.new(:books_id=>@book.id, :users_id=>@user.id)
+    #   if @bookmark.save
+    #     redirect_to books_path, notice: 'Bookmark created successfully !' and return
+    #   else
+    #     flash[:notice] = 'Database Error !'
+    #   end
+    # else
+    #   if @records.find_by_books_id(params[:id]).nil?
+    #     @bookmark = Bookmark.new(:books_id=>@book.id, :users_id=>@user.id)
+    #     if @bookmark.save
+    #       redirect_to books_path, notice: 'Bookmark created successfully !' and return
+    #     else
+    #       flash[:notice] = 'Database Error !'
+    #     end
+    #   end
+    # end
+
+    # if @bookmark != nil
+    #   if @bookmark.save
+    #     redirect_to books_path, notice: 'Bookmark created successfully !' and return
+    #   else
+    #     flash[:notice] = 'Database Error !'
+    #   end
+    # else
+    #   flash[:notice] = 'Bookmark has already been created !'
+    # end
+
+
+    # if Bookmark.find_by_books_id(params[:id]) == nil
+    #
+    #   # bookmark_params = {books_id: @book.id, users_id: @user.id}
+    #   @bookmark = Bookmark.new(:books_id=>@book.id, :users_id=>@user.id)
+    #
+    #   if @bookmark.save
+    #     redirect_to books_path, notice: 'Bookmark created successfully !'
+    #   end
+    #
+    # else
+    #   # render :bookmarked, notice1: 'Bookmark has already been created !'
+    #   flash[:notice] = 'Bookmark has already been created !'
+    # end
+
+
+    #
+    # respond_to do |format|
+    #   if @bookmark.save
+    #     format.html { redirect_to bookmarks_path, notice: 'Bookmark created successfully !' }
+    #     format.json { render :index, status: :created, location: @book }
+    #   else
+    #     format.html { render :bookmark }
+    #     # format.json { render json: @book.errors, status: :unprocessable_entity }
+    #   end
+    # end
   end
 
   helper_method :book_request

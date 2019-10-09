@@ -1,10 +1,8 @@
 class RegistrationsController < Devise::RegistrationsController
 
+
   def create
 
-    # @user = User.new(sign_up_params)
-    # @user.save
-    # respond_to do |format|
     if sign_up_params[:role]=='user'
       @stud = Student.find_by_email(sign_up_params[:email])
       if @stud.nil?
@@ -57,8 +55,7 @@ class RegistrationsController < Devise::RegistrationsController
 
   private
   def sign_up_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmation, :role,
-                                 student_attributes: [:email, :name, :password, :education, :university, :max_books],
+    params.require(:user).permit(:name, :email, :password, :password_confirmation, :role, :student, :librarian, student_attributes: [:email, :name, :password, :education, :university, :max_books],
                                  librarian_attributes: [:email, :name, :password, :libraries_id])
   end
   def account_update_params

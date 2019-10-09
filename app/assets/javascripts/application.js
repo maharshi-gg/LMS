@@ -90,6 +90,7 @@ var ready = function () {
         }
     });
 
+    $('#admin_email').prop('disabled', true);
 };
 
 $(document).ready(ready);
