@@ -37,7 +37,7 @@ Rails.application.routes.draw do
   get 'returns', to: 'book_requests#returns', as: 'returns'
   get 'hold_requests', to: 'book_requests#hold_requests', as: 'hold_requests'
   get 'delete_hold_request', to: 'book_requests#delete_hold_request', as: 'delete_hold_request'
-  devise_for :users, :controllers => { registrations: 'registrations'}
+  # devise_for :users, :controllers => { registrations: 'registrations'}
 
   get 'fb_details_new', to: 'ask_details_fb_login#new', as: 'fb_details_new'
   get 'fb_details_create', to: 'ask_details_fb_login#create', as: 'fb_details_create'

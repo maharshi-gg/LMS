@@ -5,8 +5,13 @@ class StudentsController < ApplicationController
   # GET /students
   # GET /students.json
   def index
-    @students = Student.all
     authorize Student
+    if User.find_by_email(current_user.email).provider == 'facebook' and Student.find_by_email(current_user.email).education == 'DUMMY'
+      redirect_to edit_student_path(Student.find_by_email(current_user.email)), notice: 'Please fill out details first !'
+    end
+
+    @students = Student.all
+    # authorize Student
   end
 
   # GET /students/1
@@ -56,9 +61,32 @@ class StudentsController < ApplicationController
   def update
     authorize Student
     @user = User.find_by_email(@student.email)
+    # if student_params['education'] == 'Undergraduate'
+    #   student_params[:student][:max_books] = 2
+    # elsif student_params['education'] == 'Masters'
+    #   student_params[:student][:max_books] = 4
+    # else
+    #   student_params[:student][:max_books] = 6
+    # end
+
     respond_to do |format|
       if @student.update(student_params)
         @user.update({email:@student.email})
+
+        maxbooks_cnt=0
+        # update max_books here
+        education = @student.education
+        if education == 'Undergraduate'
+          maxbooks_cnt = 2
+        elsif education == 'Masters'
+          maxbooks_cnt = 4
+        else
+          maxbooks_cnt = 6
+        end
+
+        # fire update query here
+        @student.update(max_books: maxbooks_cnt)
+
         format.html { redirect_to @student, notice: 'Student was successfully updated.' }
         format.json { render :show, status: :ok, location: @student }
       else

@@ -18,11 +18,19 @@ class HomeController < ApplicationController
           redirect_to librarians_path
         end
       elsif current_user.user?
+        @user = User.find_by_email(current_user.email)
+        if @user.provider == 'facebook'
+          if Student.find_by_email(current_user.email).blank?
+            @stud = Student.new({email:@user.email,education:"DUMMY",university:"DUMMY",max_books:0})
+            @stud.save
+            redirect_to edit_student_path(@stud[:id]) and return
+          end
+        end
         @stud = Student.find_by_email(current_user.email)
         if @stud.name.nil? or @stud.university.nil?
           @var = @stud.id
           params={:id=> @var}
-          redirect_to edit_student_path(params[:id])
+          redirect_to edit_student_path(params[:id]) and return
         else
           redirect_to students_path
         end

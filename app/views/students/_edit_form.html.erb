@@ -13,7 +13,11 @@
 
   <div class="field">
     <%= form.label :email %>
-    <%= form.text_field :email, :required => true %>
+    <% if User.find_by_email(student.email).provider == 'facebook' %>
+      <%= form.text_field :email, :required => true, :disabled => true %>
+    <% else %>
+      <%= form.text_field :email, :required => true %>
+    <% end %>
   </div>
 
   <div class="field">
@@ -21,16 +25,40 @@
     <%= form.text_field :name, :required => true %>
   </div>
 
-  <% if student.education == "" || student.education.nil? %>
-    <div class="field">
-      <%= form.label :education %>
-      <%= form.select :education, options_for_select([ ["Undergraduate","Undergradudate"], ["Masters","Masters"], ["PhD", "PhD"] ]), :required => true  %>
-    </div>
-  <% end %>
+  <div class=""field>
+    <% if User.find_by_email(student.email).provider == 'facebook' and student.education=='DUMMY' %>
+      <%# if student.education == "" || student.education.nil? %>
+        <%= form.label :education %>
+        <%= form.select :education, options_for_select([ ["Undergraduate","Undergradudate"], ["Masters","Masters"], ["PhD", "PhD"] ]), :required => true %>
+      <%# end %>
+    <% else %>
+      <% if student.education == "" || student.education.nil? %>
+        <%= form.label :education %>
+        <%= form.select :education, options_for_select([ ["Undergraduate","Undergradudate"], ["Masters","Masters"], ["PhD", "PhD"] ]), :required => true %>
+      <% end %>
+    <% end %>
+  </div>
+
+
+  <%# if student.education == "" || student.education.nil? %>
+<!--    <div class="field">-->
+      <%#= form.label :education %>
+      <%#= form.select :education, options_for_select([ ["Undergraduate","Undergradudate"], ["Masters","Masters"], ["PhD", "PhD"] ]), :required => true %>
+<!--    </div>-->
+  <%# end %>
 
   <div class="field">
-    <%= form.label :university %>
-    <%= form.text_field :university, :required => true, :disabled => !(student.university == "" || student.university.nil?) %>
+    <% if User.find_by_email(student.email).provider == 'facebook' and student.university=='DUMMY' %>
+      <%= form.label :university %>
+      <%= form.text_field :university, :required => true %>
+    <% else %>
+      <%= form.label :university %>
+      <%= form.text_field :university, :required => true, :disabled => !(student.university == "" || student.university.nil?) %>
+    <% end %>
+
+    <%#= form.label User.find_by_email(student.email).provider %>
+    <%#= form.label :university %>
+    <%#= form.text_field :university, :required => true, :disabled => !(student.university == "" || student.university.nil?) %>
   </div>
 
   <div class="actions">
