@@ -47,18 +47,31 @@ var ready = function () {
     });
 
     $('#mb_field').hide();
-    $('#student_education').change(function(){
-        if($('#user_student_education').val()=='Masters') {
-            $('#user_student_max_books').val(4);
-        }
-        else if ($('#user_student_education').val()=='Undergraduate') {
-            $('#user_student_max_books').val(2);
-        }
-        else if ($('#user_student_education').val()=='PhD') {
-            $('#user_student_max_books').val(6);
-        }
-        else $('#user_student_max_books').val(2);
-    });
+    // $('#student_education').change(function(){
+    //     if($('#user_student_education').val()=='Masters') {
+    //         $('#user_student_max_books').val(4);
+    //     }
+    //     if ($('#user_student_education').val()=='Undergraduate') {
+    //         $('#user_student_max_books').val(2);
+    //     }
+    //     if ($('#user_student_education').val()=='PhD') {
+    //         $('#user_student_max_books').val(6);
+    //     }
+    //     else $('#user_student_max_books').val(2);
+    // });
+    //
+    // $('#student_education').change(function(){
+    //     if($('#student_education').val()=='Masters') {
+    //         $('#student_max_books').val(4);
+    //     }
+    //     if ($('#student_education').val()=='Undergraduate') {
+    //         $('#student_max_books').val(2);
+    //     }
+    //     if ($('#student_education').val()=='PhD') {
+    //         $('#student_max_books').val(6);
+    //     }
+    //     else $('#student_max_books').val(2);
+    // });
 
     $('#user_password, #user_password_confirmation').on('keyup',function(){
         if($('#user_password').val() == $('#user_password_confirmation').val()){

@@ -72,12 +72,13 @@ class LibrariansController < ApplicationController
   def create
     authorize Librarian
     @librarian = Librarian.new(librarian_params)
+    @user = User.new({email:@librarian.email,password:@librarian.password,password_confirmation:@librarian.password})
 
     # create user entry here
-    puts librarian_params
-
     respond_to do |format|
       if @librarian.save
+        @librarian.update(approved:true)
+        @user.save
         format.html { redirect_to user_homepage_path, notice: 'Request sent to Admin was authorisation.' }
         format.json { render :show, status: :created, location: user_homepage_path }
       else
@@ -91,8 +92,10 @@ class LibrariansController < ApplicationController
   # PATCH/PUT /librarians/1.json
   def update
     authorize Librarian
+    @user = User.find_by_email(@librarian.email)
     respond_to do |format|
       if @librarian.update(librarian_params)
+        @user.update({email:@librarian.email})
         format.html { redirect_to librarians_url, notice: 'Librarian was successfully updated.' }
         format.json { render :show, status: :ok, location: @librarian }
       else

@@ -89,6 +89,10 @@ class BookRequestsController < ApplicationController
 
   def delete_hold_request
     @book_request = BookRequest.find(params[:id])
+    if(@book_request.hold==false)
+      @book = Book.find(@book_request[:books_id])
+      @book.update({available_count:@book[:available_count]+1})
+    end
     @book_request.delete
   end
 

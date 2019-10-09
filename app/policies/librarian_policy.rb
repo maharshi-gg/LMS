@@ -47,6 +47,10 @@ class LibrarianPolicy < ApplicationPolicy
     current_user.admin? or current_user.librarian?
   end
 
+  def edit?
+    current_user.admin? or current_user.librarian?
+  end
+
   def destroy?
     return false if current_user == @user
     current_user.admin?
