@@ -48,7 +48,7 @@ This is the ReadMe file for the LMS system developed by the team LazyCoders as p
     
     At any given time, a student can borrow a max of 'N' number of books based on their educational level: Undergraduate - 2, Masters - 4, PhD - 6
     
-    A student can view the overdue fines for his/her account.
+    A student can view the overdue fines for his/her account:
     
     Whenever a book's avaialble count is 0, a student can request the book and a hold request will be placed. As soon as someone returns that Book, it will be issued to the next user on hold.
     
@@ -56,7 +56,7 @@ This is the ReadMe file for the LMS system developed by the team LazyCoders as p
  
     A librarian can-
     
-    Log in with email and password.
+    Log in with email and password: 
     
     Edit their own profile to choose an existing library. Each librarian can only work for one library.
     
