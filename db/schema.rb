@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_08_032053) do
+ActiveRecord::Schema.define(version: 2019_10_09_142505) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,9 +53,17 @@ ActiveRecord::Schema.define(version: 2019_10_08_032053) do
     t.integer "books_id"
     t.integer "librarians_id"
     t.integer "students_id"
+    t.boolean "hold"
     t.index ["books_id"], name: "index_book_request_on_books_id"
     t.index ["librarians_id"], name: "index_book_request_on_librarians_id"
     t.index ["students_id"], name: "index_book_request_on_students_id"
+  end
+
+  create_table "bookmarks", force: :cascade do |t|
+    t.bigint "books_id"
+    t.bigint "users_id"
+    t.index ["books_id"], name: "index_bookmarks_on_books_id"
+    t.index ["users_id"], name: "index_bookmarks_on_users_id"
   end
 
   create_table "books", force: :cascade do |t|
@@ -75,7 +83,20 @@ ActiveRecord::Schema.define(version: 2019_10_08_032053) do
     t.boolean "is_issued"
     t.integer "number_hold_req"
     t.bigint "libraries_id"
+    t.integer "available_count"
     t.index ["libraries_id"], name: "index_books_on_libraries_id"
+  end
+
+  create_table "borrow_histories", force: :cascade do |t|
+    t.date "date"
+    t.boolean "is_special"
+    t.string "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "books_id"
+    t.bigint "students_id"
+    t.index ["books_id"], name: "index_borrow_histories_on_books_id"
+    t.index ["students_id"], name: "index_borrow_histories_on_students_id"
   end
 
   create_table "librarians", force: :cascade do |t|
@@ -133,6 +154,8 @@ ActiveRecord::Schema.define(version: 2019_10_08_032053) do
     t.integer "role"
     t.bigint "libraries_id"
     t.bigint "students_id"
+    t.string "provider"
+    t.string "uid"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["libraries_id"], name: "index_users_on_libraries_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
@@ -144,7 +167,11 @@ ActiveRecord::Schema.define(version: 2019_10_08_032053) do
   add_foreign_key "book_request", "books", column: "books_id"
   add_foreign_key "book_request", "librarians", column: "librarians_id"
   add_foreign_key "book_request", "students", column: "students_id"
+  add_foreign_key "bookmarks", "books", column: "books_id"
+  add_foreign_key "bookmarks", "users", column: "users_id"
   add_foreign_key "books", "libraries", column: "libraries_id"
+  add_foreign_key "borrow_histories", "books", column: "books_id"
+  add_foreign_key "borrow_histories", "students", column: "students_id"
   add_foreign_key "libraries", "users", column: "users_id"
   add_foreign_key "students", "users", column: "users_id"
   add_foreign_key "users", "libraries", column: "libraries_id"

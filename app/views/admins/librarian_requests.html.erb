@@ -18,8 +18,6 @@
       <td><%= librarian.email %></td>
       <td><%= librarian.name %></td>
       <td><%= link_to 'Approve', approve_librarian_path(librarian) %></td>
-      <td><%= link_to 'Edit', edit_admin_path(librarian) %></td>
-      <!--        <td><%#= link_to 'Approve', librarian_requests_path(admin) %></td>-->
       <td><%= link_to 'Destroy', librarian, method: :delete, data: { confirm: 'Are you sure?' } %></td>
     </tr>
   <% end %>

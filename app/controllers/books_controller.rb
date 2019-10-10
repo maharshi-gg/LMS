@@ -88,6 +88,7 @@ class BooksController < ApplicationController
               query = "INSERT INTO book_request (date,is_special,is_approved,books_id, students_id,hold) VALUES
                                                 ('#{Date.today}','#{@book.special_collection}','#{@is_approved_1}','#{@book.id}','#{@student.id}','#{false}')"
               BookRequest.connection.execute(query)
+              @book.update_attribute(:available_count, @current_count)
               if(@is_approved_1 == true)
                 @borrow_history = BorrowHistory.new(:date => Date.today, :is_special => @book.special_collection, :books_id => @book.id, :students_id => @student.id, :status => "Book Checked Out")
                 @borrow_history.save
@@ -95,7 +96,6 @@ class BooksController < ApplicationController
               redirect_to(requests_path, notice: "List of all books collected.")
               else redirect_to(root_path, alert: "Already requested or collected.");
               end
-                 @book.update_attribute(:available_count, @current_count)
           else
             redirect_to(root_path, alert: "Maximum allowed books has been reached for your account - "+@max_book_allowed.to_s)
           end

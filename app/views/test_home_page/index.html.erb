@@ -1,12 +1,12 @@
-<h1>WELCOME ADMIN !</h1>
+<h1>WELCOME <%= Admin.find_by_email(current_user.email).name %> !</h1>
 
 <br>
-<%= link_to 'Librarians', librarians_path %><br>
-<%= link_to 'Students', students_path %><br>
-<%= link_to 'Libraries',  libraries_path %><br>
-<%= link_to 'Books',books_path %><br><br>
+<%= link_to 'View Librarian functions', librarians_path %><br>
+<%= link_to 'View Student functions', students_path %><br>
+<%= link_to 'View and Create Libraries',  libraries_path %><br>
+<%= link_to 'View and Create Books',books_path %><br><br>
+
 <% if current_user.admin? %>
   <%= link_to 'Approve Librarians', librarian_requests_path %><br>
   <%= link_to 'My Profile', Admin.find_by_email(current_user.email) %><br><br>
-<!--  <%#= link_to 'Admins', admins_path %><br><br>-->
 <% end %>
