@@ -8,7 +8,7 @@ class RegistrationsController < Devise::RegistrationsController
       if @stud.nil?
         @stud = Student.new(email: sign_up_params[:email], name: params[:user][:student][:name],
                             password: sign_up_params[:password], education: params[:user][:student][:education],
-                            university: params[:user][:student][:university], fines: 0)
+                            university: params[:user][:student][:university], max_books:2, fines: 0)
         if @stud.save
           if(@stud[:education]=="Masters")
             @stud.update({max_books:4})
@@ -18,7 +18,7 @@ class RegistrationsController < Devise::RegistrationsController
             @stud.update({max_books:2})
           end
         end
-        super
+        super and return
         # redirect_to :student and return
       else
         # @stud.update(student_signup_params)
