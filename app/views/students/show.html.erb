@@ -33,6 +33,11 @@
   <%= @student.max_books %>
 </p>
 
+<p>
+  <strong>Fines:</strong>
+  <%= @student.fines %>
+</p>
+
 <br><%= link_to 'Change Password', edit_user_registration_path %><br>
 <%= link_to 'Edit Profile', edit_student_path(@student) %><br>
 <br><%= link_to 'Back', students_path %> |

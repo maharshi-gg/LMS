@@ -8,7 +8,7 @@ class RegistrationsController < Devise::RegistrationsController
       if @stud.nil?
         @stud = Student.new(email: sign_up_params[:email], name: params[:user][:student][:name],
                             password: sign_up_params[:password], education: params[:user][:student][:education],
-                            university: params[:user][:student][:university])
+                            university: params[:user][:student][:university], fines: 0)
         if @stud.save
           if(@stud[:education]=="Masters")
             @stud.update({max_books:4})
@@ -63,7 +63,8 @@ class RegistrationsController < Devise::RegistrationsController
 
   private
   def sign_up_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmation, :role, :student, :librarian, student_attributes: [:email, :name, :password, :education, :university, :max_books],
+    params.require(:user).permit(:name, :email, :password, :password_confirmation, :role,
+                                 student_attributes: [:email, :name, :password, :education, :university, :max_books],
                                  librarian_attributes: [:email, :name, :password, :libraries_id])
   end
   def account_update_params

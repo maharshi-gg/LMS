@@ -1,29 +1,35 @@
 class AdminsController < ApplicationController
   before_action :set_admin, only: [:show, :edit, :update, :destroy]
+  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
   # GET /admins
   # GET /admins.json
   def index
+    authorize Admin
     @admins = User.find_by_sql(["select * from users where role = ?",2])
   end
 
   # GET /admins/1
   # GET /admins/1.json
   def show
+    authorize Admin
   end
 
   # GET /admins/new
   def new
     @admin = Admin.new
+    authorize Admin
   end
 
   # GET /admins/1/edit
   def edit
+    authorize Admin
   end
 
   # POST /admins
   # POST /admins.json
   def create
+    authorize Admin
     @admin = Admin.new(admin_params)
 
     respond_to do |format|
@@ -40,6 +46,7 @@ class AdminsController < ApplicationController
   # PATCH/PUT /admins/1
   # PATCH/PUT /admins/1.json
   def update
+    authorize Admin
     respond_to do |format|
       if @admin.update(admin_params)
         format.html { redirect_to @admin, notice: 'Admin was successfully updated.' }
@@ -55,6 +62,7 @@ class AdminsController < ApplicationController
   # DELETE /admins/1
   # DELETE /admins/1.json
   def destroy
+    authorize Admin
     @admin.destroy
     respond_to do |format|
       format.html { redirect_to admins_url, notice: 'Admin was successfully destroyed.' }
@@ -101,4 +109,9 @@ class AdminsController < ApplicationController
     def admin_params
       params.require(:admin).permit(:email, :name, :password)
     end
+
+  def user_not_authorized
+    flash[:alert] = "You are not authorized to perform this action."
+    redirect_to(request.referrer || root_path)
+  end
 end

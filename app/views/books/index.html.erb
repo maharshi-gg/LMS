@@ -43,14 +43,22 @@
       <td><%= book.available_count %></td>
 
 
-      <% if current_user.admin? or current_user.librarian? %>
+      <% if current_user.admin? %>
         <td><%= link_to 'Show', book %></td>
         <td><%= link_to 'Edit', edit_book_path(book) %></td>
         <td><%= link_to 'Destroy', book, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       <% end %>
-      <% if current_user.user? %>
+      <% if current_user.librarian? %>
         <td><%= link_to 'Show', book %></td>
-        <td><%= link_to 'Bookmark', bookmarked_path(book, :id => book.id) %></td>
+        <% @lib = Librarian.find_by_email(current_user.email) %>
+        <%  if @lib[:libraries_id]==book.libraries_id%>
+          <td><%= link_to 'Edit', edit_book_path(book) %></td>
+          <td><%= link_to 'Destroy', book, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% else %>
+          <td colspan="2">This book is not editable since it is not in your library.</td>
+        <% end %>
+      <% end %>
+      <% if current_user.user? %>>
         <td><%= link_to 'Request Book',book_request_path(book, :id => book.id) %></td>
 
       <% end %>

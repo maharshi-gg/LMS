@@ -32,6 +32,15 @@ class BooksController < ApplicationController
 
   # GET /books/1/edit
   def edit
+    authorize Librarian
+    if(current_user.librarian?)
+      @lib = Librarian.find_by_email(current_user.email)
+      @book = Book.find(params[:id])
+      if(@book.libraries_id!=@lib[:libraries_id])
+        flash[:alert] = "You are not authorized to perform this action."
+        redirect_to(request.referrer || root_path)
+      end
+    end
   end
 
   # POST /books
