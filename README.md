@@ -8,13 +8,13 @@ This is the ReadMe file for the LMS system developed by the team LazyCoders as p
 
 * <strong>Ruby version:</strong> 2.6.3 : <strong>Rails version:</strong> 5.2.3
 
-* <strong>3rd-party gems used:</strong> Devise, Pundit
+* <strong>3rd-party gems used:</strong> Devise, Pundit, OAuth-Facebook
 
 * <strong>Database used:</strong> PostgreSQL
 
 ### Pre-configured admin account details:
 
-* Email: admin@admin.com  |  Password: admin
+* Email: admin@admin.com  |  Password: 1234
 
 ### Functionalities implemented: 
 
