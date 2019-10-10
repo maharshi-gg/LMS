@@ -26,7 +26,7 @@ This is the ReadMe file for the LMS system developed by the team LazyCoders as p
 
 * All users can use their Facebook account to log into the system.
 
-* Student:
+### Student:
 
     View the list of all the libraries: View Libraries
 
@@ -52,7 +52,7 @@ This is the ReadMe file for the LMS system developed by the team LazyCoders as p
     
     Whenever a book's avaialble count is 0, a student can request the book and a hold request will be placed. As soon as someone returns that Book, it will be issued to the next user on hold.
     
- * Librarian:  
+ ### Librarian:  
  
     A librarian can-
     
@@ -79,7 +79,7 @@ This is the ReadMe file for the LMS system developed by the team LazyCoders as p
     View the list of students with overdue books from their library along with overdue fine.
     
     
- * Admin:
+ ### Admin:
  
     Log in with an email and password
     
