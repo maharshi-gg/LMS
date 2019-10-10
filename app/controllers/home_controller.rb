@@ -35,6 +35,7 @@ class HomeController < ApplicationController
           redirect_to students_path
         end
       else
+        redirect_to user_homepage_path
       end
     end
     respond_to do |format|
