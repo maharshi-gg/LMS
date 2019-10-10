@@ -5,5 +5,6 @@ class Book < ApplicationRecord
   validates :title, :presence => true
   validates :author, :presence => true
   validates :edition, format: { with: /[0-9]*/, message: 'Only numbers allowed.' }
+  validates :language, :published, :subject, :summary, :special_collection, :book_count, presence: true
 
 end

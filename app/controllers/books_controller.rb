@@ -32,13 +32,22 @@ class BooksController < ApplicationController
 
   # GET /books/1/edit
   def edit
+    authorize Librarian
+    if(current_user.librarian?)
+      @lib = Librarian.find_by_email(current_user.email)
+      @book = Book.find(params[:id])
+      if(@book.libraries_id!=@lib[:libraries_id])
+        flash[:alert] = "You are not authorized to perform this action."
+        redirect_to(request.referrer || root_path)
+      end
+    end
   end
 
   # POST /books
   # POST /books.json
   def create
     # render plain: params[:book].inspect
-    # book_params[:available_count] = book_params[:book_count]
+
     @book = Book.new(book_params)
 
     respond_to do |format|
@@ -52,8 +61,6 @@ class BooksController < ApplicationController
         format.json { render json: @book.errors, status: :unprocessable_entity }
       end
     end
-
-
   end
 
 
@@ -90,6 +97,7 @@ class BooksController < ApplicationController
               query = "INSERT INTO book_request (date,is_special,is_approved,books_id, students_id,hold) VALUES
                                                 ('#{Date.today}','#{@book.special_collection}','#{@is_approved_1}','#{@book.id}','#{@student.id}','#{false}')"
               BookRequest.connection.execute(query)
+              @book.update_attribute(:available_count, @current_count)
               if(@is_approved_1 == true)
                 @borrow_history = BorrowHistory.new(:date => Date.today, :is_special => @book.special_collection, :books_id => @book.id, :students_id => @student.id, :status => "Book Checked Out")
                 @borrow_history.save
@@ -97,7 +105,6 @@ class BooksController < ApplicationController
               redirect_to(requests_path, notice: "List of all books collected.")
               else redirect_to(root_path, alert: "Already requested or collected.");
               end
-                 @book.update_attribute(:available_count, @current_count)
           else
             redirect_to(root_path, alert: "Maximum allowed books has been reached for your account - "+@max_book_allowed.to_s)
           end
@@ -114,6 +121,82 @@ class BooksController < ApplicationController
 
       end
 
+  end
+
+  def bookmarked
+    @book = Book.find(params[:id])
+    @user = User.find_by_email(current_user.email) # @student = Student.find_by_email(current_user.email)
+
+    @records = Bookmark.where(books_id: @book.id, users_id: @user.id)
+
+    if @records.blank?
+      @bookmark = Bookmark.new(:books_id=>@book.id, :users_id=>@user.id)
+      if @bookmark.save
+        redirect_to books_path, notice: 'Bookmark created successfully !' and return
+      else
+        flash[:notice] = 'Database Error !'
+      end
+    else
+      flash[:notice] = 'Bookmark has already been created !'
+    end
+
+
+
+    # # @records = Bookmark.find_by({:books_id=>@book.id, :users_id=>@user.id})
+    # if @records.nil?
+    #   @bookmark = Bookmark.new(:books_id=>@book.id, :users_id=>@user.id)
+    #   if @bookmark.save
+    #     redirect_to books_path, notice: 'Bookmark created successfully !' and return
+    #   else
+    #     flash[:notice] = 'Database Error !'
+    #   end
+    # else
+    #   if @records.find_by_books_id(params[:id]).nil?
+    #     @bookmark = Bookmark.new(:books_id=>@book.id, :users_id=>@user.id)
+    #     if @bookmark.save
+    #       redirect_to books_path, notice: 'Bookmark created successfully !' and return
+    #     else
+    #       flash[:notice] = 'Database Error !'
+    #     end
+    #   end
+    # end
+
+    # if @bookmark != nil
+    #   if @bookmark.save
+    #     redirect_to books_path, notice: 'Bookmark created successfully !' and return
+    #   else
+    #     flash[:notice] = 'Database Error !'
+    #   end
+    # else
+    #   flash[:notice] = 'Bookmark has already been created !'
+    # end
+
+
+    # if Bookmark.find_by_books_id(params[:id]) == nil
+    #
+    #   # bookmark_params = {books_id: @book.id, users_id: @user.id}
+    #   @bookmark = Bookmark.new(:books_id=>@book.id, :users_id=>@user.id)
+    #
+    #   if @bookmark.save
+    #     redirect_to books_path, notice: 'Bookmark created successfully !'
+    #   end
+    #
+    # else
+    #   # render :bookmarked, notice1: 'Bookmark has already been created !'
+    #   flash[:notice] = 'Bookmark has already been created !'
+    # end
+
+
+    #
+    # respond_to do |format|
+    #   if @bookmark.save
+    #     format.html { redirect_to bookmarks_path, notice: 'Bookmark created successfully !' }
+    #     format.json { render :index, status: :created, location: @book }
+    #   else
+    #     format.html { render :bookmark }
+    #     # format.json { render json: @book.errors, status: :unprocessable_entity }
+    #   end
+    # end
   end
 
   helper_method :book_request

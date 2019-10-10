@@ -42,13 +42,13 @@
     <% end %>
   </tbody>
 </table>
-
 <br>
 
-<%= link_to 'New Librarian', new_librarian_path %><br>
 <%= link_to 'View Libraries', libraries_path %><br>
 <%= link_to 'View Books', books_path %><br>
+<%= link_to 'View Borrowing History', borrow_histories_path %><br>
 <%= link_to 'View Special Book Requests', list_special_book_request_path %><br>
+<%= link_to "View Your Library's checked out books and fines", requests_path %>
 
 
 <% if current_user.librarian? %>

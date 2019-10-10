@@ -7,6 +7,11 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 #
 
-# library = Library.create([{name: 'Hunt', university: 'NC State', location: 'Centennial Campus',
-#                            max_days: 10 }, {name: 'D. H. Hill', university: 'NC State', location: 'Main Campus',
-#                                             max_days: 10 }])
+library = Library.create([{name: 'Hunt', university: 'NC State', location: 'Centennial Campus',
+                           max_days: 10, fines: 3 }, {name: 'D. H. Hill', university: 'NC State', location: 'Main Campus',
+                                            max_days: 10, fines: 5 }])
+
+admin = User.new({email:"admin@admin.com", password:"admin",password_confirmation:"admin",role:2})
+admin.save
+admin2 = Admin.new({email:"admin@admin.com", password:"admin",name:"Default Seeded Admin"})
+admin2.save

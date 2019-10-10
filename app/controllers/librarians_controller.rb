@@ -54,6 +54,16 @@ class LibrariansController < ApplicationController
     #     redirect_to user_homepage, :alert => "Access denied!"
     #   end
     # end
+
+    if(current_user.librarian?)
+      @lib = Librarian.find_by_email(current_user.email)
+      @lib2 = Librarian.find(params[:id])
+      if(@lib.id!=@lib2[:id])
+        flash[:alert] = "You are not authorized to perform this action."
+        redirect_to(request.referrer || root_path)
+      end
+    end
+
   end
 
   # GET /librarians/new
@@ -65,6 +75,14 @@ class LibrariansController < ApplicationController
   # GET /librarians/1/edit
   def edit
     authorize Librarian
+    if(current_user.librarian?)
+      @lib = Librarian.find_by_email(current_user.email)
+      @lib2 = Librarian.find(params[:id])
+      if(@lib.id!=@lib2[:id])
+        flash[:alert] = "You are not authorized to perform this action."
+        redirect_to(request.referrer || root_path)
+      end
+    end
   end
 
   # POST /librarians

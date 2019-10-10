@@ -36,10 +36,10 @@
   </div>
 
   <% if student.education == "" || student.education.nil? %>
-  <div class="field">
-    <%= form.label :education %>
-    <%= form.select :education, options_for_select([ ["Undergraduate","Undergradudate"], ["Masters","Masters"], ["PhD", "PhD"] ]), :required => true  %>
-  </div>
+    <div class="field">
+      <%= form.label :education %>
+      <%= form.select :education, options_for_select([ ["Undergraduate","Undergradudate"], ["Masters","Masters"], ["PhD", "PhD"] ]), :required => true  %>
+    </div>
   <% end %>
 
   <div class="field">

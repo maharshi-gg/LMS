@@ -1,16 +1,14 @@
 class RegistrationsController < Devise::RegistrationsController
 
+
   def create
 
-    # @user = User.new(sign_up_params)
-    # @user.save
-    # respond_to do |format|
     if sign_up_params[:role]=='user'
       @stud = Student.find_by_email(sign_up_params[:email])
       if @stud.nil?
         @stud = Student.new(email: sign_up_params[:email], name: params[:user][:student][:name],
                             password: sign_up_params[:password], education: params[:user][:student][:education],
-                            university: params[:user][:student][:university])
+                            university: params[:user][:student][:university], fines: 0)
         if @stud.save
           if(@stud[:education]=="Masters")
             @stud.update({max_books:4})
