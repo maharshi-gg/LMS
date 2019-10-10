@@ -4,5 +4,4 @@ class BookRequest < ApplicationRecord
   belongs_to :librarians
   belongs_to :students
 
-  validates :date, :is_special, :is_approved, :hold, presence: true
 end

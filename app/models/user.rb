@@ -1,7 +1,4 @@
 class User < ApplicationRecord
-
-  validates :email, :role, presence: true
-
   enum role: {user: 0, librarian: 1, admin: 2}
   after_initialize :set_default_role,:if => :new_record?
   # before_save :copy_data
