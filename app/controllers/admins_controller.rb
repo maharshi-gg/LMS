@@ -12,7 +12,7 @@ class AdminsController < ApplicationController
   # GET /admins/1
   # GET /admins/1.json
   def show
-    authorize Admin
+  # authorize Admin
   end
 
   # GET /admins/new
