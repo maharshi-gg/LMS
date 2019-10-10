@@ -26,16 +26,16 @@ class HomeController < ApplicationController
             redirect_to edit_student_path(@stud[:id]) and return
           end
         end
-        @stud = Student.find_by_email(current_user.email)
-        if @stud.name.nil? or @stud.university.nil?
-          @var = @stud.id
-          params={:id=> @var}
-          redirect_to edit_student_path(params[:id]) and return
-        else
-          redirect_to students_path
-        end
-      else
-        redirect_to user_homepage_path
+      #   @stud = Student.find_by_email(current_user.email)
+      #   if @stud.name.nil? or @stud.university.nil?
+      #     @var = @stud.id
+      #     params={:id=> @var}
+      #     redirect_to edit_student_path(params[:id]) and return
+      #   else
+      #     redirect_to students_path
+      #   end
+      # else
+      #   redirect_to user_homepage_path
       end
     end
     respond_to do |format|
