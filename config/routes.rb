@@ -27,6 +27,8 @@ Rails.application.routes.draw do
   get 'page2', to: 'page2#index', as: 'page2'
   get 'book_request', to: 'books#book_request', as: 'book_request'
 
+  # get 'borrow_history', to: 'borrow_histories#'
+
   get 'bookmarked', to: 'books#bookmarked', as: 'bookmarked'
   get 'unbookmarked', to: 'bookmarks#unbookmark', as: 'unbookmarked'
   get 'list_special_book_request', to: 'librarians#list_special_book_request', as: 'list_special_book_request'
