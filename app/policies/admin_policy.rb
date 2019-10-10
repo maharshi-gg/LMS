@@ -1,17 +1,6 @@
 class AdminPolicy < ApplicationPolicy
   attr_reader :current_user, :model
 
-  class Scope < Scope
-    def resolve
-      if user.admin?
-        scope.all
-      else
-        scope.where(user: admin)
-        scope.all
-      end
-    end
-  end
-
   def initialize(current_user, model)
     @current_user = current_user
     @user = model
